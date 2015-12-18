@@ -1,2 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" />
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="source">
+      <UniqueIdentifier>{96b916ac-a9b1-49a1-83fe-2b22171f767d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{e3edf053-95d6-41c8-a11a-16a8884d5319}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="raw_file_buffer.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="utils.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="raw_file_io.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="raw_file_buffer.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="utils.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="raw_file_io.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

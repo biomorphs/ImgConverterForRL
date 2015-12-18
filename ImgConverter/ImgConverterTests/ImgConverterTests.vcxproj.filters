@@ -5,10 +5,19 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="source\tests">
+      <UniqueIdentifier>{3854dd9f-de39-4eaf-80b9-8bec86df5271}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="raw_file_buffer_tests.cpp">
+      <Filter>source\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="raw_file_io_tests.cpp">
+      <Filter>source\tests</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

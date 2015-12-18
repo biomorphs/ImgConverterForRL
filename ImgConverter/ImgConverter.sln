@@ -21,6 +21,8 @@ Global
 		Debug|x86 = Debug|x86
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
+		UnitTests|x64 = UnitTests|x64
+		UnitTests|x86 = UnitTests|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{309B17E6-3974-4722-AEA3-3DB1160C657F}.Debug|x64.ActiveCfg = Debug|x64
@@ -31,6 +33,8 @@ Global
 		{309B17E6-3974-4722-AEA3-3DB1160C657F}.Release|x64.Build.0 = Release|x64
 		{309B17E6-3974-4722-AEA3-3DB1160C657F}.Release|x86.ActiveCfg = Release|Win32
 		{309B17E6-3974-4722-AEA3-3DB1160C657F}.Release|x86.Build.0 = Release|Win32
+		{309B17E6-3974-4722-AEA3-3DB1160C657F}.UnitTests|x64.ActiveCfg = UnitTests|x64
+		{309B17E6-3974-4722-AEA3-3DB1160C657F}.UnitTests|x86.ActiveCfg = UnitTests|Win32
 		{8A532CE3-9719-4E99-BFF0-C9BC32637E73}.Debug|x64.ActiveCfg = Debug|x64
 		{8A532CE3-9719-4E99-BFF0-C9BC32637E73}.Debug|x64.Build.0 = Debug|x64
 		{8A532CE3-9719-4E99-BFF0-C9BC32637E73}.Debug|x86.ActiveCfg = Debug|Win32
@@ -39,6 +43,10 @@ Global
 		{8A532CE3-9719-4E99-BFF0-C9BC32637E73}.Release|x64.Build.0 = Release|x64
 		{8A532CE3-9719-4E99-BFF0-C9BC32637E73}.Release|x86.ActiveCfg = Release|Win32
 		{8A532CE3-9719-4E99-BFF0-C9BC32637E73}.Release|x86.Build.0 = Release|Win32
+		{8A532CE3-9719-4E99-BFF0-C9BC32637E73}.UnitTests|x64.ActiveCfg = UnitTests|x64
+		{8A532CE3-9719-4E99-BFF0-C9BC32637E73}.UnitTests|x64.Build.0 = UnitTests|x64
+		{8A532CE3-9719-4E99-BFF0-C9BC32637E73}.UnitTests|x86.ActiveCfg = UnitTests|Win32
+		{8A532CE3-9719-4E99-BFF0-C9BC32637E73}.UnitTests|x86.Build.0 = UnitTests|Win32
 		{8A9FFE44-D3AF-4ED8-BEBB-7CDA308ECDA3}.Debug|x64.ActiveCfg = Debug|x64
 		{8A9FFE44-D3AF-4ED8-BEBB-7CDA308ECDA3}.Debug|x64.Build.0 = Debug|x64
 		{8A9FFE44-D3AF-4ED8-BEBB-7CDA308ECDA3}.Debug|x86.ActiveCfg = Debug|Win32
@@ -47,6 +55,10 @@ Global
 		{8A9FFE44-D3AF-4ED8-BEBB-7CDA308ECDA3}.Release|x64.Build.0 = Release|x64
 		{8A9FFE44-D3AF-4ED8-BEBB-7CDA308ECDA3}.Release|x86.ActiveCfg = Release|Win32
 		{8A9FFE44-D3AF-4ED8-BEBB-7CDA308ECDA3}.Release|x86.Build.0 = Release|Win32
+		{8A9FFE44-D3AF-4ED8-BEBB-7CDA308ECDA3}.UnitTests|x64.ActiveCfg = UnitTests|x64
+		{8A9FFE44-D3AF-4ED8-BEBB-7CDA308ECDA3}.UnitTests|x64.Build.0 = UnitTests|x64
+		{8A9FFE44-D3AF-4ED8-BEBB-7CDA308ECDA3}.UnitTests|x86.ActiveCfg = UnitTests|Win32
+		{8A9FFE44-D3AF-4ED8-BEBB-7CDA308ECDA3}.UnitTests|x86.Build.0 = UnitTests|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
