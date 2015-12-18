@@ -29,5 +29,11 @@
     <ClInclude Include="raw_file_io.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="colour_24bit.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="colour_24bit.inl">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

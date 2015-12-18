@@ -209,6 +209,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="colour_24bit_tests.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="raw_file_buffer_tests.cpp" />
     <ClCompile Include="raw_file_io_tests.cpp" />
