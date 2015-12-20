@@ -166,15 +166,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="colour_24bit.h" />
+    <ClInclude Include="bitmap_file_reader.h" />
+    <ClInclude Include="colour_rgb.h" />
+    <ClInclude Include="image.h" />
     <ClInclude Include="raw_file_buffer.h" />
     <ClInclude Include="raw_file_io.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="colour_24bit.inl">
+    <ClInclude Include="colour_rgb.inl">
       <FileType>CppCode</FileType>
     </ClInclude>
+    <ClCompile Include="bitmap_file_reader.cpp" />
+    <ClCompile Include="image.cpp" />
     <ClCompile Include="raw_file_buffer.cpp" />
     <ClCompile Include="raw_file_io.cpp" />
     <ClCompile Include="utils.cpp" />

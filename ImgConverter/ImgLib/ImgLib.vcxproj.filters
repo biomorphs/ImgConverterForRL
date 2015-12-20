@@ -18,6 +18,12 @@
     <ClCompile Include="raw_file_io.cpp">
       <Filter>source</Filter>
     </ClCompile>
+    <ClCompile Include="bitmap_file_reader.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="image.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="raw_file_buffer.h">
@@ -29,10 +35,16 @@
     <ClInclude Include="raw_file_io.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="colour_24bit.h">
+    <ClInclude Include="bitmap_file_reader.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="colour_24bit.inl">
+    <ClInclude Include="colour_rgb.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="colour_rgb.inl">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="image.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

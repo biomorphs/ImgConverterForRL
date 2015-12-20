@@ -1,13 +1,13 @@
 #include "catch/catch.hpp"
-#include "../ImgLib/colour_24bit.h"
+#include "../ImgLib/colour_rgb.h"
 
-TEST_CASE("24 bit colour constructors/get/set")
+TEST_CASE("colour constructors/get/set")
 {
-	Colour24Bit black(0, 0, 0);
-	Colour24Bit red(255, 0, 0);
-	Colour24Bit green(0, 255, 0);
-	Colour24Bit white(255, 255, 255);
-	Colour24Bit darkBlue(0, 0, 64);
+	ColourRGB black(0, 0, 0);
+	ColourRGB red(255, 0, 0);
+	ColourRGB green(0, 255, 0);
+	ColourRGB white(255, 255, 255);
+	ColourRGB darkBlue(0, 0, 64);
 
 	SECTION("Black is black")
 	{
@@ -23,7 +23,7 @@ TEST_CASE("24 bit colour constructors/get/set")
 
 	SECTION("White is really white")
 	{
-		REQUIRE(white == Colour24Bit(255, 255, 255));
+		REQUIRE(white == ColourRGB(255, 255, 255));
 	}
 
 	SECTION("Copy")
@@ -35,7 +35,7 @@ TEST_CASE("24 bit colour constructors/get/set")
 
 	SECTION("Set r / g / b")
 	{
-		Colour24Bit col(0, 0, 0);
+		ColourRGB col(0, 0, 0);
 		col.SetRed(128);
 		col.SetGreen(64);
 		col.SetBlue(100);
@@ -47,7 +47,7 @@ TEST_CASE("24 bit colour constructors/get/set")
 	SECTION("Set from RGB buffer data")
 	{
 		uint8_t rgbData[] = { 32, 64, 128 };
-		Colour24Bit colour(rgbData);
+		ColourRGB colour(rgbData);
 		REQUIRE(colour.GetRed() == 32);
 		REQUIRE(colour.GetGreen() == 64);
 		REQUIRE(colour.GetBlue() == 128);
@@ -56,7 +56,7 @@ TEST_CASE("24 bit colour constructors/get/set")
 	SECTION("Set RGB buffer from colour")
 	{
 		uint8_t rgbData[] = { 0, 0, 0 };
-		Colour24Bit colour(50, 80, 39);
+		ColourRGB colour(50, 80, 39);
 		colour.ToRGBBuffer(rgbData);
 
 		REQUIRE(rgbData[0] == 50);
@@ -64,7 +64,7 @@ TEST_CASE("24 bit colour constructors/get/set")
 		REQUIRE(rgbData[2] == 39);
 	}
 
-	SECTION("24 bit to floating point")
+	SECTION("to floating point")
 	{
 		REQUIRE(red.GetRedAsFloat() == Approx(1.0f));
 		REQUIRE(red.GetGreenAsFloat() == Approx(0.0f));
@@ -72,10 +72,10 @@ TEST_CASE("24 bit colour constructors/get/set")
 		REQUIRE(darkBlue.GetBlueAsFloat() == Approx(64.0f / 255.0f));
 	}
 
-	SECTION("Quantise floats to 24 bit")
+	SECTION("Quantise floats to rgba8")
 	{
 		float r = 32.0f / 255.0f, g = 28.0f / 255.0f, b = 15.0f / 255.0f;
-		Colour24Bit colour(r, g, b);
+		ColourRGB colour(r, g, b);
 		REQUIRE(colour.GetRed() == 32);
 		REQUIRE(colour.GetGreen() == 28);
 		REQUIRE(colour.GetBlue() == 15);

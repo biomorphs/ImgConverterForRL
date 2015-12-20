@@ -209,7 +209,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="colour_24bit_tests.cpp" />
+    <ClCompile Include="bmp_loader_tests.cpp" />
+    <ClCompile Include="colour_rgb_tests.cpp" />
+    <ClCompile Include="image_tests.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="raw_file_buffer_tests.cpp" />
     <ClCompile Include="raw_file_io_tests.cpp" />

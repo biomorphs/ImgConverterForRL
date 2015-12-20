@@ -19,7 +19,13 @@
     <ClCompile Include="raw_file_io_tests.cpp">
       <Filter>source\tests</Filter>
     </ClCompile>
-    <ClCompile Include="colour_24bit_tests.cpp">
+    <ClCompile Include="bmp_loader_tests.cpp">
+      <Filter>source\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="colour_rgb_tests.cpp">
+      <Filter>source\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="image_tests.cpp">
       <Filter>source\tests</Filter>
     </ClCompile>
   </ItemGroup>
