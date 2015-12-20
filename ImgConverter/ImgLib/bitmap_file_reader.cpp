@@ -1,4 +1,5 @@
 #include "bitmap_file_reader.h"
+#include "bitmap_file_header.h"
 #include "raw_file_buffer.h"
 #include "image.h"
 
@@ -24,7 +25,7 @@ bool BitmapFileReader::ExtractHeader(const RawFileBuffer& data, BitmapFileHeader
 	memcpy(static_cast<void*>(&targetHeader), static_cast<const void*>(data.GetContents()), sizeof(targetHeader));
 
 	// Ensure the file type token is set
-	if (targetHeader.m_fileTypeToken != 0x4d42)	// Is it a bitmap?
+	if (targetHeader.m_fileTypeToken != c_bitmapHeaderFileToken)	// Is it a bitmap?
 	{
 		return false;
 	}

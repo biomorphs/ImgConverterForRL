@@ -21,7 +21,7 @@ public:
 	inline uint32_t GetHeightPixels() const { return m_heightPixels; }
 
 	inline void SetPixelColour(uint32_t xCoord, uint32_t yCoord, const ColourRGB& value);
-	inline void GetPixelColour(uint32_t xCoord, uint32_t yCoord, ColourRGB& value);
+	inline void GetPixelColour(uint32_t xCoord, uint32_t yCoord, ColourRGB& value) const;
 	
 private:
 
@@ -41,7 +41,7 @@ void Image::SetPixelColour(uint32_t xCoord, uint32_t yCoord, const ColourRGB& va
 	}
 }
 
-void Image::GetPixelColour(uint32_t xCoord, uint32_t yCoord, ColourRGB& value)
+void Image::GetPixelColour(uint32_t xCoord, uint32_t yCoord, ColourRGB& value) const
 {
 	if (xCoord < m_widthPixels && yCoord < m_heightPixels)
 	{

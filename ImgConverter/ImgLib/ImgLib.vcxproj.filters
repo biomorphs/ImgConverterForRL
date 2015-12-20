@@ -24,6 +24,9 @@
     <ClCompile Include="image.cpp">
       <Filter>source</Filter>
     </ClCompile>
+    <ClCompile Include="bitmap_file_writer.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="raw_file_buffer.h">
@@ -45,6 +48,12 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="image.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="bitmap_file_writer.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="bitmap_file_header.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

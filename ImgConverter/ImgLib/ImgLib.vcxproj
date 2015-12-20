@@ -166,7 +166,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="bitmap_file_header.h" />
     <ClInclude Include="bitmap_file_reader.h" />
+    <ClInclude Include="bitmap_file_writer.h" />
     <ClInclude Include="colour_rgb.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="raw_file_buffer.h" />
@@ -178,6 +180,7 @@
       <FileType>CppCode</FileType>
     </ClInclude>
     <ClCompile Include="bitmap_file_reader.cpp" />
+    <ClCompile Include="bitmap_file_writer.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="raw_file_buffer.cpp" />
     <ClCompile Include="raw_file_io.cpp" />

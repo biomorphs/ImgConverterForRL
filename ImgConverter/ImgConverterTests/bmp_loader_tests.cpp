@@ -2,6 +2,7 @@
 #include "../ImgLib/raw_file_io.h"
 #include "../ImgLib/raw_file_buffer.h"
 #include "../ImgLib/bitmap_file_reader.h"
+#include "../ImgLib/bitmap_file_header.h"
 #include "../ImgLib/image.h"
 
 TEST_CASE("Parse empty file buffer")
@@ -26,7 +27,7 @@ TEST_CASE("Parse invalid data")
 TEST_CASE("Test valid header data")
 {
 	BitmapFileHeader testHeader;
-	testHeader.m_fileTypeToken = 0x4d42;
+	testHeader.m_fileTypeToken = c_bitmapHeaderFileToken;
 	testHeader.m_totalFileSize = 0;
 	testHeader.m_reserved = 0;
 	testHeader.m_dataOffset = sizeof(BitmapFileHeader);
@@ -48,7 +49,7 @@ TEST_CASE("Test valid header data")
 TEST_CASE("Test invalid header data")
 {
 	BitmapFileHeader testHeader;
-	testHeader.m_fileTypeToken = 0x4d42;
+	testHeader.m_fileTypeToken = c_bitmapHeaderFileToken;
 	testHeader.m_totalFileSize = 0;
 	testHeader.m_reserved = 0;
 	testHeader.m_dataOffset = sizeof(BitmapFileHeader);
@@ -104,7 +105,7 @@ TEST_CASE("Parse valid 24bit 16x16 bmp file header")
 	
 	SECTION("Test header for known values")
 	{
-		REQUIRE(bmpHeader.m_fileTypeToken == 0x4d42);
+		REQUIRE(bmpHeader.m_fileTypeToken == c_bitmapHeaderFileToken);
 		REQUIRE(bmpHeader.m_colourBitsPerPx == 24);
 		REQUIRE(bmpHeader.m_imgWidthPx == 16);
 		REQUIRE(bmpHeader.m_imgHeightPx == 16);

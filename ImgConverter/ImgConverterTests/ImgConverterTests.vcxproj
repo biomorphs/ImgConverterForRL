@@ -210,6 +210,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="bmp_loader_tests.cpp" />
+    <ClCompile Include="bmp_writer_tests.cpp" />
     <ClCompile Include="colour_rgb_tests.cpp" />
     <ClCompile Include="image_tests.cpp" />
     <ClCompile Include="main.cpp" />
