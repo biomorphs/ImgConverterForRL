@@ -110,6 +110,7 @@ int main(int argc, char *argv[])
 		if (srcImage == nullptr)
 		{
 			std::cout << "Failed to load source file '" << commandLineParams.GetSourcePath() << "'";
+			return 1;
 		}
 		if (!WriteImageToDXT1File(srcImage, commandLineParams.GetDestinationPath()))
 		{

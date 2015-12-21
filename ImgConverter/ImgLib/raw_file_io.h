@@ -2,6 +2,7 @@
 #define IMGCONVERTER_RAW_FILE_IO_INCLUDED
 
 #include "utils.h"
+#include <string>
 
 class RawFileBuffer;
 
