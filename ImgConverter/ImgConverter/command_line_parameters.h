@@ -15,13 +15,24 @@ public:
 		MissingParameters,
 		OK
 	};
+
+	enum class FileType
+	{
+		Bitmap,
+		DDS,
+		Unknown
+	};
+
 	ParseResult ParseCommandLine(int argc, char* argv[]);
 	void DisplayHelp();
 
 	const std::string& GetSourcePath() const;
 	const std::string& GetDestinationPath() const;
+	FileType GetSourceFiletype() const;
+	FileType GetDestinationFiletype() const;
 
 private:
+	FileType GetFiletypeFromPath(const std::string& path) const;
 	std::string m_sourcePath;
 	std::string m_destinationPath;
 };

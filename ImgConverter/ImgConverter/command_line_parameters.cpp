@@ -1,5 +1,6 @@
 #include "command_line_parameters.h"
 #include <iostream>
+#include <algorithm>
 
 CommandLineParameters::CommandLineParameters()
 {
@@ -14,6 +15,47 @@ CommandLineParameters::~CommandLineParameters()
 void CommandLineParameters::DisplayHelp()
 {
 	std::cout << "Usage: ImgConverter <sourcefile> <destfile>" << std::endl;
+}
+
+CommandLineParameters::FileType CommandLineParameters::GetSourceFiletype() const
+{
+	return GetFiletypeFromPath(m_sourcePath);
+}
+
+CommandLineParameters::FileType CommandLineParameters::GetDestinationFiletype() const
+{
+	return GetFiletypeFromPath(m_destinationPath);
+}
+
+CommandLineParameters::FileType CommandLineParameters::GetFiletypeFromPath(const std::string& path) const
+{
+	// This is pretty crude, but it does the job!
+	// Note it will only really work with ANSI strings since tolower does not work
+	// with utf8, etc.
+	// Ideally we would use a cross-platform filesystem library to do this correctly, 
+	// but the stdlib one isn't coming until c++17(!) so this will do for now
+
+	// Pull out the file extension by grabbing anything in the string after the last '.'
+	std::string foundExtension = "";
+	const auto lastSeparator = path.find_last_of('.');	
+	if (lastSeparator != std::string::npos)
+	{
+		foundExtension = path.substr(lastSeparator);
+		std::transform(foundExtension.begin(), foundExtension.end(), foundExtension.begin(), tolower);
+	}	
+
+	if (foundExtension == ".dds")
+	{
+		return CommandLineParameters::FileType::DDS;
+	}
+	else if (foundExtension == ".bmp")
+	{
+		return CommandLineParameters::FileType::Bitmap;
+	}
+	else
+	{
+		return CommandLineParameters::FileType::Unknown;
+	}
 }
 
 const std::string& CommandLineParameters::GetSourcePath() const

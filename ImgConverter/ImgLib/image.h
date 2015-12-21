@@ -25,8 +25,8 @@ public:
 	
 private:
 
-	inline ColourRGB& PixelAt(uint32_t x, uint32_t y) { return m_pixelData.data()[ (y * m_heightPixels) + x ]; }
-	inline const ColourRGB& PixelAt(uint32_t x, uint32_t y) const { return m_pixelData.data()[(y * m_heightPixels) + x]; }
+	inline ColourRGB& PixelAt(uint32_t x, uint32_t y) { return m_pixelData.data()[ (y * m_widthPixels) + x ]; }
+	inline const ColourRGB& PixelAt(uint32_t x, uint32_t y) const { return m_pixelData.data()[(y * m_widthPixels) + x]; }
 
 	uint32_t m_widthPixels;
 	uint32_t m_heightPixels;

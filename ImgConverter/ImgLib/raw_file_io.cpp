@@ -74,7 +74,7 @@ bool RawFileBufferWriter::WriteTofile(const std::string& path, const RawFileBuff
 
 bool RawFileBufferWriter::WriteInternal(const std::string& path, const RawFileBuffer& sourceData)
 {
-	std::ofstream fileStream(path.c_str(), std::ios::binary || std::ios::trunc);
+	std::ofstream fileStream(path.c_str(), std::ios::binary);
 	if (!fileStream.is_open())
 	{
 		return false;

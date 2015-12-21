@@ -31,7 +31,7 @@ TEST_CASE("Load / Write / Load cycle")
 
 	{	// Load source image for testing
 		RawFileBufferReader fileReader;
-		REQUIRE(fileReader.LoadFromFile("../TestData/TestImg16x16_24bit.bmp", sourceImageOriginalBuffer) == true);
+		REQUIRE(fileReader.LoadFromFile("../TestData/TestImg64x16.bmp", sourceImageOriginalBuffer) == true);
 		BitmapFileReader bmpFileReader;
 		sourceImage = bmpFileReader.ExtractImage(sourceImageOriginalBuffer);
 		REQUIRE(sourceImage.get() != nullptr);

@@ -1,13 +1,123 @@
 #include "command_line_parameters.h"
+#include "../ImgLib/block_compressed_image.h"
+#include "../ImgLib/dxt1_file_reader.h"
+#include "../ImgLib/dxt1_file_writer.h"
+#include "../ImgLib/bitmap_file_reader.h"
+#include "../ImgLib/bitmap_file_writer.h"
+#include "../ImgLib/raw_file_buffer.h"
+#include "../ImgLib/raw_file_io.h"
+#include "../ImgLib/image.h"
+#include <iostream>
+#include <memory>
+
+std::unique_ptr<Image> LoadBitmapFromFile(const std::string& path)
+{
+	RawFileBufferReader fileReader;
+	RawFileBuffer dataBuffer;
+	if (!fileReader.LoadFromFile(path, dataBuffer))
+	{
+		return nullptr;
+	}
+	BitmapFileReader bmpFileReader;
+	return bmpFileReader.ExtractImage(dataBuffer);
+}
+
+bool WriteImageToBitmapFile(const std::unique_ptr<Image>& source, const std::string& destPath)
+{
+	RawFileBuffer outputBuffer;
+	BitmapFileWriter fileWriter;
+	if (!fileWriter.WriteBitmapFile(*source.get(), outputBuffer))
+	{
+		return false;
+	}
+	RawFileBufferWriter bufferWriter;
+	return bufferWriter.WriteTofile(destPath, outputBuffer);
+}
+
+std::unique_ptr<BlockCompressedImage> LoadDXT1FromFile(const std::string& path)
+{
+	RawFileBufferReader fileReader;
+	RawFileBuffer dataBuffer;
+	if (!fileReader.LoadFromFile(path, dataBuffer))
+	{
+		return nullptr;
+	}
+	DXT1FileReader bmpFileReader;
+	return bmpFileReader.ExtractImage(dataBuffer);
+}
+
+bool WriteImageToDXT1File(const std::unique_ptr<BlockCompressedImage>& source, const std::string& destPath)
+{
+	RawFileBuffer outputBuffer;
+	DXT1FileWriter fileWriter;
+	if (!fileWriter.WriteDXT1File(*source.get(), outputBuffer))
+	{
+		return false;
+	}
+	RawFileBufferWriter bufferWriter;
+	return bufferWriter.WriteTofile(destPath, outputBuffer);
+}
+
+bool ProcessCommandLine(int argc, char *argv[], CommandLineParameters& params)
+{
+	if (params.ParseCommandLine(argc, argv) != CommandLineParameters::ParseResult::OK)
+	{
+		params.DisplayHelp();
+		return false;
+	}
+	if (params.GetSourceFiletype() == CommandLineParameters::FileType::Unknown)
+	{
+		std::cout << "Source file-type is not a .bmp or .dds file!";
+		return false;
+	}
+	if (params.GetDestinationFiletype() == CommandLineParameters::FileType::Unknown)
+	{
+		std::cout << "Destination file-type is not a .bmp or .dds file!";
+		return false;
+	}
+	return true;
+}
 
 int main(int argc, char *argv[])
 {
 	CommandLineParameters commandLineParams;
-	if (commandLineParams.ParseCommandLine(argc, argv) != CommandLineParameters::ParseResult::OK)
+	if (!ProcessCommandLine(argc, argv, commandLineParams))
 	{
-		commandLineParams.DisplayHelp();
 		return 1;
 	}
+
+	const auto srcFiletype = commandLineParams.GetSourceFiletype();
+	const auto destFiletype = commandLineParams.GetDestinationFiletype();
+	if (srcFiletype == CommandLineParameters::FileType::Bitmap && 
+		destFiletype == CommandLineParameters::FileType::Bitmap)
+	{
+		std::unique_ptr<Image> srcImage = LoadBitmapFromFile(commandLineParams.GetSourcePath());
+		if (srcImage == nullptr)
+		{
+			std::cout << "Failed to load source file '" << commandLineParams.GetSourcePath() << "'";
+			return 1;
+		}
+		if (!WriteImageToBitmapFile(srcImage, commandLineParams.GetDestinationPath()))
+		{
+			std::cout << "Failed to write destination file '" << commandLineParams.GetDestinationPath() << "'";
+			return 1;
+		}
+	}
+	else if (srcFiletype == CommandLineParameters::FileType::DDS &&
+		destFiletype == CommandLineParameters::FileType::DDS)
+	{
+		std::unique_ptr<BlockCompressedImage> srcImage = LoadDXT1FromFile(commandLineParams.GetSourcePath());
+		if (srcImage == nullptr)
+		{
+			std::cout << "Failed to load source file '" << commandLineParams.GetSourcePath() << "'";
+		}
+		if (!WriteImageToDXT1File(srcImage, commandLineParams.GetDestinationPath()))
+		{
+			std::cout << "Failed to write destination file '" << commandLineParams.GetDestinationPath() << "'";
+			return 1;
+		}
+	}
+
     return 0;
 }
 

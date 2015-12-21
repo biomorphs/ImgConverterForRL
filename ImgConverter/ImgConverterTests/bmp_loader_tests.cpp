@@ -130,16 +130,16 @@ TEST_CASE("Parse unsupported bitmap header")
 	REQUIRE(bmpFileReader.IsBitmapFormatSupported(bmpHeader) == false);
 }
 
-TEST_CASE("Load valid 24bit 16x16 bmp file into image storage")
+TEST_CASE("Load valid 24bit 64x16 bmp file into image storage")
 {
 	RawFileBufferReader fileReader;
 	RawFileBuffer dataBuffer;
-	REQUIRE(fileReader.LoadFromFile("../TestData/TestImg16x16_24bit.bmp", dataBuffer) == true);
+	REQUIRE(fileReader.LoadFromFile("../TestData/TestImg64x16.bmp", dataBuffer) == true);
 
 	BitmapFileReader bmpFileReader;
 	auto loadedImage = bmpFileReader.ExtractImage(dataBuffer);
 	REQUIRE(loadedImage.get() != nullptr);
-	REQUIRE(loadedImage->GetWidthPixels() == 16);
+	REQUIRE(loadedImage->GetWidthPixels() == 64);
 	REQUIRE(loadedImage->GetHeightPixels() == 16);
 
 	SECTION("Test known values")
@@ -151,7 +151,7 @@ TEST_CASE("Load valid 24bit 16x16 bmp file into image storage")
 		REQUIRE(testColour == ColourRGB(255, 0, 0));
 
 		// top-right = green
-		loadedImage->GetPixelColour(15, 15, testColour);
+		loadedImage->GetPixelColour(63, 15, testColour);
 		REQUIRE(testColour == ColourRGB(0, 255, 0));
 
 		// Bottom-left = blue
@@ -159,7 +159,7 @@ TEST_CASE("Load valid 24bit 16x16 bmp file into image storage")
 		REQUIRE(testColour == ColourRGB(0, 0, 255));
 
 		// Bottom-right = white
-		loadedImage->GetPixelColour(15, 0, testColour);
+		loadedImage->GetPixelColour(63, 0, testColour);
 		REQUIRE(testColour == ColourRGB(255, 255, 255));
 	}
 }
