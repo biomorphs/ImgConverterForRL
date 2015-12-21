@@ -209,9 +209,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="block_compressed_image_tests.cpp" />
+    <ClCompile Include="block_compressed_pixels_tests.cpp" />
     <ClCompile Include="bmp_loader_tests.cpp" />
     <ClCompile Include="bmp_writer_tests.cpp" />
     <ClCompile Include="colour_rgb_tests.cpp" />
+    <ClCompile Include="dxt1_loader_tests.cpp" />
     <ClCompile Include="image_tests.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="raw_file_buffer_tests.cpp" />
@@ -221,6 +224,9 @@
     <ProjectReference Include="..\ImgLib\ImgLib.vcxproj">
       <Project>{8a532ce3-9719-4e99-bff0-c9bc32637e73}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="16bit_colour_test_helpers.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

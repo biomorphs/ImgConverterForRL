@@ -16,9 +16,6 @@ public:
 	bool ExtractHeader(const RawFileBuffer& data, BitmapFileHeader& targetHeader);
 	bool IsBitmapFormatSupported(const BitmapFileHeader& header);
 	std::unique_ptr<Image> ExtractImage(const RawFileBuffer& data);
-
-private:
-
 };
 
 #endif

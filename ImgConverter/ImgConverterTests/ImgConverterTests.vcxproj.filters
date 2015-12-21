@@ -31,5 +31,19 @@
     <ClCompile Include="bmp_writer_tests.cpp">
       <Filter>source\tests</Filter>
     </ClCompile>
+    <ClCompile Include="dxt1_loader_tests.cpp">
+      <Filter>source\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="block_compressed_image_tests.cpp">
+      <Filter>source\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="block_compressed_pixels_tests.cpp">
+      <Filter>source\tests</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="16bit_colour_test_helpers.h">
+      <Filter>source\tests</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

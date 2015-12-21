@@ -16,6 +16,7 @@ public:
 	inline explicit ColourRGB(int32_t r, int32_t g, int32_t b);
 	inline explicit ColourRGB(uint8_t r, uint8_t g, uint8_t b);
 	inline explicit ColourRGB(float r, float g, float b);
+	inline explicit ColourRGB(uint16_t colR5G6B5);
 	inline ~ColourRGB();
 
 	inline ColourRGB& operator=(const ColourRGB& other);
@@ -36,6 +37,8 @@ public:
 	inline float GetBlueAsFloat() const;
 
 	inline void ToRGBBuffer(uint8_t* targetBuffer) const;
+
+	inline uint16_t ToR5G6B5() const;
 
 private:
 	inline float ByteToFloatValue(uint8_t v) const;

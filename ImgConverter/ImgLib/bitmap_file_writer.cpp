@@ -50,8 +50,8 @@ bool BitmapFileWriter::WriteBitmapFile(const Image& sourceData, RawFileBuffer& t
 
 void BitmapFileWriter::GenerateHeader(const Image& sourceData, BitmapFileHeader& header)
 {
-	const size_t imgDataSizeBytes = sourceData.GetHeightPixels() * sourceData.GetWidthPixels() * 3;
-	const size_t imgFileTotalSize = imgDataSizeBytes + sizeof(BitmapFileHeader);
+	const uint32_t imgDataSizeBytes = static_cast< uint32_t >( sourceData.GetHeightPixels() * sourceData.GetWidthPixels() * 3 );
+	const uint32_t imgFileTotalSize = static_cast< uint32_t >( imgDataSizeBytes + sizeof(BitmapFileHeader) );
 
 	header.m_fileTypeToken = c_bitmapHeaderFileToken;
 	header.m_totalFileSize = imgFileTotalSize;

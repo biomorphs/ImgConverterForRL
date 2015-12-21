@@ -1,5 +1,7 @@
 #include "catch/catch.hpp"
+#include "16bit_colour_test_helpers.h"
 #include "../ImgLib/colour_rgb.h"
+
 
 TEST_CASE("colour constructors/get/set")
 {
@@ -79,5 +81,53 @@ TEST_CASE("colour constructors/get/set")
 		REQUIRE(colour.GetRed() == 32);
 		REQUIRE(colour.GetGreen() == 28);
 		REQUIRE(colour.GetBlue() == 15);
+	}
+
+	SECTION("R5G6B5 conversions")
+	{
+		const uint16_t c_redAsR5G6B5 = MAKE_R5G6B5(255, 0, 0);
+		const uint16_t c_greenAsR5G6B5 = MAKE_R5G6B5(0, 255, 0);
+		const uint16_t c_blueAsR5G6B5 = MAKE_R5G6B5(0, 0, 255);
+
+		SECTION("Quantisation")
+		{
+			ColourRGB darkRed(63, 0, 0);
+			uint16_t darkRed16Bit = MAKE_R5G6B5(63, 0, 0);
+			REQUIRE(darkRed.ToR5G6B5() == darkRed16Bit);
+
+			ColourRGB lightGreen(63, 192, 63);
+			uint16_t lightGreen16Bit = MAKE_R5G6B5(63, 192, 63);
+			REQUIRE(lightGreen.ToR5G6B5() == lightGreen16Bit);
+		}
+
+		SECTION("expansion")
+		{
+			ColourRGB redFrom16Bit(c_redAsR5G6B5);
+			REQUIRE(redFrom16Bit.GetRed() == 255);
+			REQUIRE(redFrom16Bit.GetGreen() == 0);
+			REQUIRE(redFrom16Bit.GetBlue() == 0);
+
+			ColourRGB greenFrom16Bit(c_greenAsR5G6B5);
+			REQUIRE(greenFrom16Bit.GetRed() == 0);
+			REQUIRE(greenFrom16Bit.GetGreen() == 255);
+			REQUIRE(greenFrom16Bit.GetBlue() == 0);
+
+			ColourRGB blueFrom16Bit(c_blueAsR5G6B5);
+			REQUIRE(blueFrom16Bit.GetRed() == 0);
+			REQUIRE(blueFrom16Bit.GetGreen() == 0);
+			REQUIRE(blueFrom16Bit.GetBlue() == 255);
+			
+			// Max error from 1 byte -> 5 bit conversion = 8
+			// Max error from 1 byte -> 6 bit conversion = 4
+			ColourRGB lightGreenFrom16bit(MAKE_R5G6B5(64,192,64));
+			REQUIRE(APPROX_MATCH_QUANTISED(8, lightGreenFrom16bit.GetRed(), 64));
+			REQUIRE(APPROX_MATCH_QUANTISED(4, lightGreenFrom16bit.GetGreen(), 192));
+			REQUIRE(APPROX_MATCH_QUANTISED(8, lightGreenFrom16bit.GetBlue(), 64));
+
+			ColourRGB darkerRed(MAKE_R5G6B5(32, 0, 0));
+			REQUIRE(APPROX_MATCH_QUANTISED(8, darkerRed.GetRed(), 32));
+			REQUIRE(APPROX_MATCH_QUANTISED(4, darkerRed.GetGreen(), 0));
+			REQUIRE(APPROX_MATCH_QUANTISED(8, darkerRed.GetBlue(), 0));
+		}
 	}
 }

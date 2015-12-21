@@ -27,6 +27,12 @@
     <ClCompile Include="bitmap_file_writer.cpp">
       <Filter>source</Filter>
     </ClCompile>
+    <ClCompile Include="dxt1_file_reader.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="block_compressed_image.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="raw_file_buffer.h">
@@ -56,5 +62,22 @@
     <ClInclude Include="bitmap_file_header.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="dxt1_file_reader.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="dxt1_file_header.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="block_compressed_image.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="block_compressed_pixels.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="block_compressed_pixels.inl">
+      <Filter>include</Filter>
+    </None>
   </ItemGroup>
 </Project>
