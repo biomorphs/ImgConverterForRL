@@ -215,6 +215,7 @@
     <ClCompile Include="bmp_writer_tests.cpp" />
     <ClCompile Include="colour_rgb_tests.cpp" />
     <ClCompile Include="dxt1_loader_tests.cpp" />
+    <ClCompile Include="dxt1_to_bmp_tests.cpp" />
     <ClCompile Include="dxt1_writer_tests.cpp" />
     <ClCompile Include="image_tests.cpp" />
     <ClCompile Include="main.cpp" />

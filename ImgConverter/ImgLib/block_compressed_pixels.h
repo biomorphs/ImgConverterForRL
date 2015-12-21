@@ -19,8 +19,8 @@ public:
 
 	inline void SetRefColour1(const ColourRGB& col);
 	inline void SetRefColour2(const ColourRGB& col);
-	inline ColourRGB GetRefColour1() const;
-	inline ColourRGB GetRefColour2() const;
+	inline uint16_t GetRefColour1() const { return m_refColour1; }
+	inline uint16_t GetRefColour2() const { return m_refColour2; }
 
 	inline void SetPixelColourIndex(uint32_t x, uint32_t y, uint32_t id);
 	inline uint32_t GetPixelColourIndex(uint32_t x, uint32_t y) const;

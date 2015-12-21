@@ -45,16 +45,6 @@ void BlockCompressedPixels::SetRefColour2(const ColourRGB& col)
 	m_refColour2 = col.ToR5G6B5();
 }
 
-ColourRGB BlockCompressedPixels::GetRefColour1() const
-{
-	return ColourRGB(m_refColour1);
-}
-
-ColourRGB BlockCompressedPixels::GetRefColour2() const
-{
-	return ColourRGB(m_refColour2);
-}
-
 void BlockCompressedPixels::SetPixelColourIndex(uint32_t x, uint32_t y, uint32_t id)
 {
 	// truncate index to 2 bits and shift to correct position
@@ -86,26 +76,41 @@ BlockCompressedPixels::ColourLUT::ColourLUT(const BlockCompressedPixels& block)
 {
 	const float c_twoThirds = 2.0f / 3.0f;
 	const float c_oneThird = 1.0f / 3.0f;
-	const ColourRGB colour0 = block.GetRefColour1();
-	const ColourRGB colour1 = block.GetRefColour2();
+	const ColourRGB colour0(block.GetRefColour1());
+	const ColourRGB colour1(block.GetRefColour2());
 	const float colour0asFloat[3] = { colour0.GetRedAsFloat(), colour0.GetGreenAsFloat(), colour0.GetBlueAsFloat() };
 	const float colour1asFloat[3] = { colour1.GetRedAsFloat(), colour1.GetGreenAsFloat(), colour1.GetBlueAsFloat() };
 
 	m_lut[0] = colour0;
 	m_lut[1] = colour1;
-	
-	//color_2 = 2/3*color_0 + 1/3*color_1
-	float tmpColourAsFloat[3];
-	tmpColourAsFloat[0] = c_twoThirds * colour0asFloat[0] + c_oneThird * colour1asFloat[0];
-	tmpColourAsFloat[1] = c_twoThirds * colour0asFloat[1] + c_oneThird * colour1asFloat[1];
-	tmpColourAsFloat[2] = c_twoThirds * colour0asFloat[2] + c_oneThird * colour1asFloat[2];
-	m_lut[2] = ColourRGB(tmpColourAsFloat[0], tmpColourAsFloat[1], tmpColourAsFloat[2]);
 
-	//color_3 = 1/3 * color_0 + 2/3 * color_1
-	tmpColourAsFloat[0] = c_oneThird * colour0asFloat[0] + c_twoThirds * colour1asFloat[0];
-	tmpColourAsFloat[1] = c_oneThird * colour0asFloat[1] + c_twoThirds * colour1asFloat[1];
-	tmpColourAsFloat[2] = c_oneThird * colour0asFloat[2] + c_twoThirds * colour1asFloat[2];
-	m_lut[3] = ColourRGB(tmpColourAsFloat[0], tmpColourAsFloat[1], tmpColourAsFloat[2]);
+	
+	// If colour1 <= colour2, there may be 1 bit alpha
+	if (block.GetRefColour1() <= block.GetRefColour2())
+	{
+		// colour_2 = 0.5 * colour_0 + 0.5 * colour_1
+		float tmpColourAsFloat[3];
+		tmpColourAsFloat[0] = 0.5f * colour0asFloat[0] + 0.5f * colour1asFloat[0];
+		tmpColourAsFloat[1] = 0.5f * colour0asFloat[1] + 0.5f * colour1asFloat[1];
+		tmpColourAsFloat[2] = 0.5f * colour0asFloat[2] + 0.5f * colour1asFloat[2];
+		m_lut[2] = ColourRGB(tmpColourAsFloat[0], tmpColourAsFloat[1], tmpColourAsFloat[2]);
+		m_lut[3] = ColourRGB(0, 0, 0);
+	}
+	else
+	{
+		//color_2 = 2/3*color_0 + 1/3*color_1
+		float tmpColourAsFloat[3];
+		tmpColourAsFloat[0] = c_twoThirds * colour0asFloat[0] + c_oneThird * colour1asFloat[0];
+		tmpColourAsFloat[1] = c_twoThirds * colour0asFloat[1] + c_oneThird * colour1asFloat[1];
+		tmpColourAsFloat[2] = c_twoThirds * colour0asFloat[2] + c_oneThird * colour1asFloat[2];
+		m_lut[2] = ColourRGB(tmpColourAsFloat[0], tmpColourAsFloat[1], tmpColourAsFloat[2]);
+
+		//color_3 = 1/3 * color_0 + 2/3 * color_1
+		tmpColourAsFloat[0] = c_oneThird * colour0asFloat[0] + c_twoThirds * colour1asFloat[0];
+		tmpColourAsFloat[1] = c_oneThird * colour0asFloat[1] + c_twoThirds * colour1asFloat[1];
+		tmpColourAsFloat[2] = c_oneThird * colour0asFloat[2] + c_twoThirds * colour1asFloat[2];
+		m_lut[3] = ColourRGB(tmpColourAsFloat[0], tmpColourAsFloat[1], tmpColourAsFloat[2]);
+	}
 }
 
 inline const ColourRGB& BlockCompressedPixels::ColourLUT::GetColour(uint32_t index)

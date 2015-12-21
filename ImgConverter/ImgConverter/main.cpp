@@ -1,4 +1,5 @@
 #include "command_line_parameters.h"
+#include "../ImgLib/dxt1_to_bitmap_conversion.h"
 #include "../ImgLib/block_compressed_image.h"
 #include "../ImgLib/dxt1_file_reader.h"
 #include "../ImgLib/dxt1_file_writer.h"
@@ -42,8 +43,8 @@ std::unique_ptr<BlockCompressedImage> LoadDXT1FromFile(const std::string& path)
 	{
 		return nullptr;
 	}
-	DXT1FileReader bmpFileReader;
-	return bmpFileReader.ExtractImage(dataBuffer);
+	DXT1FileReader dxtFileReaderr;
+	return dxtFileReaderr.ExtractImage(dataBuffer);
 }
 
 bool WriteImageToDXT1File(const std::unique_ptr<BlockCompressedImage>& source, const std::string& destPath)
@@ -113,6 +114,28 @@ int main(int argc, char *argv[])
 			return 1;
 		}
 		if (!WriteImageToDXT1File(srcImage, commandLineParams.GetDestinationPath()))
+		{
+			std::cout << "Failed to write destination file '" << commandLineParams.GetDestinationPath() << "'";
+			return 1;
+		}
+	}
+	else if (srcFiletype == CommandLineParameters::FileType::DDS &&
+		destFiletype == CommandLineParameters::FileType::Bitmap)
+	{
+		std::unique_ptr<BlockCompressedImage> srcImage = LoadDXT1FromFile(commandLineParams.GetSourcePath());
+		if (srcImage == nullptr)
+		{
+			std::cout << "Failed to load source file '" << commandLineParams.GetSourcePath() << "'";
+			return 1;
+		}
+		DXT1ToBitmapConversion converter;
+		auto imgResult = converter.Convert(*srcImage);
+		if (imgResult == nullptr)
+		{
+			std::cout << "Failed to convert image from dds to bmp";
+			return 1;
+		}
+		if (!WriteImageToBitmapFile(imgResult, commandLineParams.GetDestinationPath()))
 		{
 			std::cout << "Failed to write destination file '" << commandLineParams.GetDestinationPath() << "'";
 			return 1;

@@ -26,11 +26,16 @@ public:
 	// However, this is useful for testing
 	void GetPixelColour(uint32_t x, uint32_t y, ColourRGB& colour) const;
 
+	// Block access
+	BlockCompressedPixels* BlockAt(uint32_t x, uint32_t y);
+	const BlockCompressedPixels* BlockAt(uint32_t x, uint32_t y) const;
+
 	// Raw data accessors for fast serialisation
 	const uint8_t* BlockData() const { return reinterpret_cast<const uint8_t*>(m_pixelData.data()); }
 	uint8_t* BlockData()	{ return reinterpret_cast<uint8_t*>(m_pixelData.data()); }
 
 private:
+	BlockCompressedPixels& GetBlock(uint32_t blckX, uint32_t blckY);
 	const BlockCompressedPixels& GetBlock(uint32_t blckX, uint32_t blckY) const;
 	uint32_t m_widthPixels;
 	uint32_t m_heightPixels;

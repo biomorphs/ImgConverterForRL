@@ -8,8 +8,8 @@ TEST_CASE("Block compressed pixel ref colours correct")
 	BlockCompressedPixels pixels;
 	pixels.SetRefColour1(ColourRGB(255, 0, 0));
 	pixels.SetRefColour2(ColourRGB(0, 0, 255));
-	REQUIRE(pixels.GetRefColour1() == ColourRGB(255, 0, 0));
-	REQUIRE(pixels.GetRefColour2() == ColourRGB(0, 0, 255));
+	REQUIRE(pixels.GetRefColour1() == ColourRGB(255, 0, 0).ToR5G6B5());
+	REQUIRE(pixels.GetRefColour2() == ColourRGB(0, 0, 255).ToR5G6B5());
 }
 
 TEST_CASE("Block compressed pixel index set/get")

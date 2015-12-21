@@ -7,7 +7,7 @@ BlockCompressedImage::BlockCompressedImage(uint32_t widthPixels, uint32_t height
 	, m_heightBlocks(0)
 {
 	// Block-compressed images must have size a multiple of 4 pixels
-	if ((widthPixels & 3) == 0 && (heightPixels & 3) == 0 && widthPixels > 4 && heightPixels > 4)
+	if ((widthPixels & 3) == 0 && (heightPixels & 3) == 0 && widthPixels >= 4 && heightPixels >= 4)
 	{
 		m_widthPixels = widthPixels;
 		m_heightPixels = heightPixels;
@@ -55,7 +55,32 @@ void BlockCompressedImage::GetPixelColour(uint32_t x, uint32_t y, ColourRGB& col
 	}
 }
 
+BlockCompressedPixels& BlockCompressedImage::GetBlock(uint32_t blckX, uint32_t blckY)
+{
+	return m_pixelData[(blckY * m_widthBlocks) + blckX];
+}
+
 const BlockCompressedPixels& BlockCompressedImage::GetBlock(uint32_t blckX, uint32_t blckY) const
 {
 	return m_pixelData[(blckY * m_widthBlocks) + blckX];
+}
+
+BlockCompressedPixels* BlockCompressedImage::BlockAt(uint32_t x, uint32_t y)
+{
+	// !Note - y-axis is flipped in DXT1-compressed images
+	if (x < m_widthBlocks && y < m_heightBlocks)
+	{
+		return &GetBlock(x, m_heightBlocks - y - 1);
+	}
+	return nullptr;
+}
+
+const BlockCompressedPixels* BlockCompressedImage::BlockAt(uint32_t x, uint32_t y) const
+{
+	// !Note - y-axis is flipped in DXT1-compressed images
+	if (x < m_widthBlocks && y < m_heightBlocks)
+	{
+		return &GetBlock(x, m_heightBlocks - y - 1);
+	}
+	return nullptr;
 }

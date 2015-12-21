@@ -43,6 +43,9 @@
     <ClCompile Include="dxt1_writer_tests.cpp">
       <Filter>source\tests</Filter>
     </ClCompile>
+    <ClCompile Include="dxt1_to_bmp_tests.cpp">
+      <Filter>source\tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="16bit_colour_test_helpers.h">
