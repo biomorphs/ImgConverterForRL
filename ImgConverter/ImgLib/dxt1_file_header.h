@@ -1,6 +1,8 @@
 #ifndef IMGCONVERTER_DXT1_FILE_HEADER_INCLUDED
 #define IMGCONVERTER_DXT1_FILE_HEADER_INCLUDED
 
+#include <stdint.h>
+
 // All flags / struct formats are from https://msdn.microsoft.com/en-us/library/bb943992%28v=vs.85%29.aspx
 // Note that not all flags are dealt with, only the ones we care about are listed here
 

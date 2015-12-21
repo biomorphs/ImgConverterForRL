@@ -46,7 +46,7 @@ void BlockCompressedImage::GetPixelColour(uint32_t x, uint32_t y, ColourRGB& col
 	if (x < m_widthPixels && y < m_heightPixels)
 	{
 		const uint32_t flippedY = m_heightPixels - 1 - y;
-		const uint32_t blockX = x >> 2;		// x / 4
+		const uint32_t blockX = x >> 2;				// x / 4
 		const uint32_t blockY = flippedY >> 2;		// y / 4
 		const auto& sourceBlock = GetBlock(blockX, blockY);
 		BlockCompressedPixels::ColourLUT lut(sourceBlock);

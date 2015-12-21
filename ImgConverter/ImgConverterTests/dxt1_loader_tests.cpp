@@ -29,11 +29,11 @@ TEST_CASE("Test DXT1 support from valid header")
 	DXT1FileHeader dxt1Header;
 	dxt1Header.m_ddsFileToken = c_ddsFileToken;
 	dxt1Header.m_headerSize = c_dxt1HeaderSize;
-	dxt1Header.m_flags = DDSD_CAPS | DDSD_HEIGHT | DDSD_WIDTH | DDSD_PIXELFORMAT | DDSD_MIPMAPCOUNT | DDSD_LINEARSIZE;
+	dxt1Header.m_flags = DDSD_CAPS | DDSD_HEIGHT | DDSD_WIDTH | DDSD_PIXELFORMAT | DDSD_LINEARSIZE;
 	dxt1Header.m_heightPx = 16;
 	dxt1Header.m_widthPx = 16;
 	dxt1Header.m_pitchOrLinearSize = 256;
-	dxt1Header.m_mipCount = 1;
+	dxt1Header.m_mipCount = 0;
 	dxt1Header.m_pixelFormatSize = c_dxt1PixelFormatSize;
 	dxt1Header.m_pixelFormatFlags = DDPF_FOURCC;
 	dxt1Header.m_pixelFormatFourCC = c_dxt1FourCC;
@@ -48,11 +48,11 @@ TEST_CASE("Test unsupported dds formats")
 	DXT1FileHeader dxt1Header;
 	dxt1Header.m_ddsFileToken = c_ddsFileToken;
 	dxt1Header.m_headerSize = c_dxt1HeaderSize;
-	dxt1Header.m_flags = DDSD_CAPS | DDSD_HEIGHT | DDSD_WIDTH | DDSD_PIXELFORMAT | DDSD_MIPMAPCOUNT | DDSD_LINEARSIZE;
+	dxt1Header.m_flags = DDSD_CAPS | DDSD_HEIGHT | DDSD_WIDTH | DDSD_PIXELFORMAT | DDSD_LINEARSIZE;
 	dxt1Header.m_heightPx = 16;
 	dxt1Header.m_widthPx = 16;
 	dxt1Header.m_pitchOrLinearSize = 256;
-	dxt1Header.m_mipCount = 1;
+	dxt1Header.m_mipCount = 0;
 	dxt1Header.m_pixelFormatSize = c_dxt1PixelFormatSize;
 	dxt1Header.m_pixelFormatFlags = DDPF_FOURCC;
 	dxt1Header.m_pixelFormatFourCC = c_dxt1FourCC;

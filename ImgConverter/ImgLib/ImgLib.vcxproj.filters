@@ -33,6 +33,9 @@
     <ClCompile Include="block_compressed_image.cpp">
       <Filter>source</Filter>
     </ClCompile>
+    <ClCompile Include="dxt1_file_writer.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="raw_file_buffer.h">
@@ -72,6 +75,9 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="block_compressed_pixels.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="dxt1_file_writer.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

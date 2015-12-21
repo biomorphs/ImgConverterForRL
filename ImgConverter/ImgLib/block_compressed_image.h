@@ -27,6 +27,7 @@ public:
 	void GetPixelColour(uint32_t x, uint32_t y, ColourRGB& colour) const;
 
 	// Raw data accessors for fast serialisation
+	const uint8_t* BlockData() const { return reinterpret_cast<const uint8_t*>(m_pixelData.data()); }
 	uint8_t* BlockData()	{ return reinterpret_cast<uint8_t*>(m_pixelData.data()); }
 
 private:
