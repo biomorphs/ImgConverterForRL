@@ -42,15 +42,13 @@ BlockCompressedImage& BlockCompressedImage::operator=(BlockCompressedImage&& oth
 
 void BlockCompressedImage::GetPixelColour(uint32_t x, uint32_t y, ColourRGB& colour) const
 {
-	// !Note - y-axis is flipped in DXT1-compressed images
 	if (x < m_widthPixels && y < m_heightPixels)
 	{
-		const uint32_t flippedY = m_heightPixels - 1 - y;
 		const uint32_t blockX = x >> 2;				// x / 4
-		const uint32_t blockY = flippedY >> 2;		// y / 4
+		const uint32_t blockY = y >> 2;				// y / 4
 		const auto& sourceBlock = GetBlock(blockX, blockY);
 		BlockCompressedPixels::ColourLUT lut(sourceBlock);
-		const uint32_t pixelColourIndex = sourceBlock.GetPixelColourIndex(x & 3, flippedY & 3);	// extract pixel in block
+		const uint32_t pixelColourIndex = sourceBlock.GetPixelColourIndex(x & 3, y & 3);	// extract pixel in block
 		colour = lut.GetColour(pixelColourIndex);
 	}
 }
@@ -67,20 +65,18 @@ const BlockCompressedPixels& BlockCompressedImage::GetBlock(uint32_t blckX, uint
 
 BlockCompressedPixels* BlockCompressedImage::BlockAt(uint32_t x, uint32_t y)
 {
-	// !Note - y-axis is flipped in DXT1-compressed images
 	if (x < m_widthBlocks && y < m_heightBlocks)
 	{
-		return &GetBlock(x, m_heightBlocks - y - 1);
+		return &GetBlock(x, y);
 	}
 	return nullptr;
 }
 
 const BlockCompressedPixels* BlockCompressedImage::BlockAt(uint32_t x, uint32_t y) const
 {
-	// !Note - y-axis is flipped in DXT1-compressed images
 	if (x < m_widthBlocks && y < m_heightBlocks)
 	{
-		return &GetBlock(x, m_heightBlocks - y - 1);
+		return &GetBlock(x, y);
 	}
 	return nullptr;
 }

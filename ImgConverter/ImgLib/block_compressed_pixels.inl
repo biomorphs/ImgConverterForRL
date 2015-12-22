@@ -66,10 +66,8 @@ uint32_t BlockCompressedPixels::GetPixelColourIndex(uint32_t x, uint32_t y) cons
 
 inline uint32_t BlockCompressedPixels::GetIndexShiftPosition(uint32_t x, uint32_t y) const
 {
-	// !Note - y-coordinates are stored in reverse order in DXT1 images, therefore
-	// we flip it here transparently (3-y)
 	Assert(x < 4 && y < 4);
-	return ((3 - y) << 3) + (x << 1);	// ((3 - y) * 8) + (x * 2)
+	return (y << 3) + (x << 1);	// (y * 8) + (x * 2)
 }
 
 BlockCompressedPixels::ColourLUT::ColourLUT(const BlockCompressedPixels& block)
@@ -83,7 +81,6 @@ BlockCompressedPixels::ColourLUT::ColourLUT(const BlockCompressedPixels& block)
 
 	m_lut[0] = colour0;
 	m_lut[1] = colour1;
-
 	
 	// If colour1 <= colour2, there may be 1 bit alpha
 	if (block.GetRefColour1() <= block.GetRefColour2())

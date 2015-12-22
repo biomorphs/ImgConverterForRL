@@ -148,19 +148,19 @@ TEST_CASE("Load valid 16x16 dxt1 file into image storage")
 		loadedImage->GetPixelColour(15, 0, br);
 
 		// top-left = red
-		loadedImage->GetPixelColour(0, 15, testColour);
+		loadedImage->GetPixelColour(0, 0, testColour);
 		REQUIRE(testColour == ColourRGB(255, 0, 0));
 
 		// top-right = green
-		loadedImage->GetPixelColour(15, 15, testColour);
+		loadedImage->GetPixelColour(15, 0, testColour);
 		REQUIRE(testColour == ColourRGB(0, 255, 0));
 
 		// Bottom-left = blue
-		loadedImage->GetPixelColour(0, 0, testColour);
+		loadedImage->GetPixelColour(0, 15, testColour);
 		REQUIRE(testColour == ColourRGB(0, 0, 255));
 
 		// Bottom-right = white
-		loadedImage->GetPixelColour(15, 0, testColour);
+		loadedImage->GetPixelColour(15, 15, testColour);
 		REQUIRE(testColour == ColourRGB(255, 255, 255));
 	}
 }

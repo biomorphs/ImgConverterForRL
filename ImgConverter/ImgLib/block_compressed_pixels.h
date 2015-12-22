@@ -7,6 +7,7 @@
 // A pixel block consists of 2 colours stored in R5G6B5, followed by
 // 16 2-bit indices used to linearly interpolate between the two reference points
 // A lookup table can be generated from the block to speed-up pixel colour calculation
+// Note! data is stored with flipped y-axis (so 0 = top, height = bottom)
 class BlockCompressedPixels
 {
 public:

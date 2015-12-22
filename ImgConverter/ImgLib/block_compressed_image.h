@@ -7,6 +7,7 @@
 
 // An image containing DXT1 data
 // Pixels are stored in 4x4 blocks of DXT1 data
+// Note! Data is stored with flipped y-axis (i.e. top left = 0,0; bottom right = w, h)
 class BlockCompressedImage
 {
 public:
