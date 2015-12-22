@@ -194,7 +194,7 @@
     <ClCompile Include="dxt1_file_writer.cpp" />
     <ClCompile Include="dxt1_to_bitmap_conversion.cpp" />
     <ClCompile Include="image.cpp" />
-    <ClCompile Include="image_to_block_compressed.cpp" />
+    <ClCompile Include="bitmap_to_dxt1_converter.cpp" />
     <ClCompile Include="raw_file_buffer.cpp" />
     <ClCompile Include="raw_file_io.cpp" />
   </ItemGroup>

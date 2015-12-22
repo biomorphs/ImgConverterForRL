@@ -45,11 +45,11 @@
     <ClCompile Include="dxt1_to_bitmap_conversion.cpp">
       <Filter>conversion</Filter>
     </ClCompile>
-    <ClCompile Include="image_to_block_compressed.cpp">
-      <Filter>conversion</Filter>
-    </ClCompile>
     <ClCompile Include="compress_block_minmax.cpp">
       <Filter>conversion\dxt block converters</Filter>
+    </ClCompile>
+    <ClCompile Include="bitmap_to_dxt1_converter.cpp">
+      <Filter>conversion</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
