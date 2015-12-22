@@ -172,11 +172,13 @@
     <ClInclude Include="block_compressed_image.h" />
     <ClInclude Include="block_compressed_pixels.h" />
     <ClInclude Include="colour_rgb.h" />
+    <ClInclude Include="compress_block_minmax.h" />
     <ClInclude Include="dxt1_file_header.h" />
     <ClInclude Include="dxt1_file_reader.h" />
     <ClInclude Include="dxt1_file_writer.h" />
     <ClInclude Include="dxt1_to_bitmap_conversion.h" />
     <ClInclude Include="image.h" />
+    <ClInclude Include="image_to_block_compressed.h" />
     <ClInclude Include="raw_file_buffer.h" />
     <ClInclude Include="raw_file_io.h" />
     <ClInclude Include="utils.h" />
@@ -192,12 +194,16 @@
     <ClCompile Include="dxt1_file_writer.cpp" />
     <ClCompile Include="dxt1_to_bitmap_conversion.cpp" />
     <ClCompile Include="image.cpp" />
+    <ClCompile Include="image_to_block_compressed.cpp" />
     <ClCompile Include="raw_file_buffer.cpp" />
     <ClCompile Include="raw_file_io.cpp" />
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="block_compressed_pixels.inl" />
+    <ClCompile Include="compress_block_minmax.cpp">
+      <FileType>Document</FileType>
+    </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

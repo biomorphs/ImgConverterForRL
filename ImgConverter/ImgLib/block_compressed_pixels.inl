@@ -3,6 +3,7 @@
 
 #include "utils.h"
 #include "colour_rgb.h"
+#include <algorithm>
 
 BlockCompressedPixels::BlockCompressedPixels()
 	: m_rawData(0)
@@ -108,6 +109,23 @@ BlockCompressedPixels::ColourLUT::ColourLUT(const BlockCompressedPixels& block)
 		tmpColourAsFloat[2] = c_oneThird * colour0asFloat[2] + c_twoThirds * colour1asFloat[2];
 		m_lut[3] = ColourRGB(tmpColourAsFloat[0], tmpColourAsFloat[1], tmpColourAsFloat[2]);
 	}
+}
+
+// Find the closest colour to the one passed in + return its index
+inline uint32_t BlockCompressedPixels::ColourLUT::ClosestIndex(const ColourRGB& testColour)
+{
+	uint32_t closestIndex = UINT32_MAX;
+	float closestDistance = FLT_MAX;
+	for (uint32_t id = 0; id < 4; ++id)
+	{
+		float distance = ColourRGB::Distance(testColour, m_lut[id]);
+		if (distance < closestDistance)
+		{
+			closestDistance = distance;
+			closestIndex = id;
+		}
+	}
+	return closestIndex;
 }
 
 inline const ColourRGB& BlockCompressedPixels::ColourLUT::GetColour(uint32_t index)

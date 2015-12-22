@@ -53,3 +53,19 @@ TEST_CASE("Block compressed pixels colour table generation")
 	REQUIRE(APPROX_MATCH_QUANTISED(4, lut.GetColour(3).GetGreen(), 0));
 	REQUIRE(APPROX_MATCH_QUANTISED(8, lut.GetColour(3).GetBlue(), 170));
 }
+
+TEST_CASE("Block compression closest colour tests")
+{
+	BlockCompressedPixels pixels;
+	pixels.SetRefColour1(ColourRGB(255, 0, 0));
+	pixels.SetRefColour2(ColourRGB(0, 0, 255));
+
+	BlockCompressedPixels::ColourLUT lut(pixels);
+
+	REQUIRE(lut.ClosestIndex(ColourRGB(255, 0, 0)) == 0);
+	REQUIRE(lut.ClosestIndex(ColourRGB(0, 0, 255)) == 1);
+	REQUIRE(lut.ClosestIndex(ColourRGB(220, 0, 32)) == 0);
+	REQUIRE(lut.ClosestIndex(ColourRGB(16, 20, 230)) == 1);
+	REQUIRE(lut.ClosestIndex(ColourRGB(100, 0, 0)) == 3);
+	REQUIRE(lut.ClosestIndex(ColourRGB(200, 0, 180)) == 2);
+}

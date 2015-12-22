@@ -46,6 +46,12 @@
     <ClCompile Include="dxt1_to_bmp_tests.cpp">
       <Filter>source\tests</Filter>
     </ClCompile>
+    <ClCompile Include="bmp_to_dxt_tests.cpp">
+      <Filter>source\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="minmax_block_compress_tests.cpp">
+      <Filter>source\tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="16bit_colour_test_helpers.h">

@@ -40,10 +40,20 @@ public:
 
 	inline uint16_t ToR5G6B5() const;
 
+	static inline ColourRGB Min(const ColourRGB& c0, const ColourRGB& c1);
+	static inline ColourRGB Max(const ColourRGB& c0, const ColourRGB& c1);
+
+	// Returns a float representing 'distance' from source to target
+	static inline float Distance(const ColourRGB& source, const ColourRGB& target);
+
 private:
 	inline float ByteToFloatValue(uint8_t v) const;
 	inline uint8_t FloatToByteValue(float v) const;
-	uint8_t m_rgb[4];
+	union {
+		uint32_t m_rgba;
+		uint8_t m_rgb[4];
+	};
+	
 };
 
 #include "colour_rgb.inl"

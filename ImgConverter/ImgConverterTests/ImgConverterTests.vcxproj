@@ -212,6 +212,7 @@
     <ClCompile Include="block_compressed_image_tests.cpp" />
     <ClCompile Include="block_compressed_pixels_tests.cpp" />
     <ClCompile Include="bmp_loader_tests.cpp" />
+    <ClCompile Include="bmp_to_dxt_tests.cpp" />
     <ClCompile Include="bmp_writer_tests.cpp" />
     <ClCompile Include="colour_rgb_tests.cpp" />
     <ClCompile Include="dxt1_loader_tests.cpp" />
@@ -219,6 +220,7 @@
     <ClCompile Include="dxt1_writer_tests.cpp" />
     <ClCompile Include="image_tests.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="minmax_block_compress_tests.cpp" />
     <ClCompile Include="raw_file_buffer_tests.cpp" />
     <ClCompile Include="raw_file_io_tests.cpp" />
   </ItemGroup>

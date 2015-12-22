@@ -39,6 +39,9 @@
     <ClCompile Include="dxt1_to_bitmap_conversion.cpp">
       <Filter>source</Filter>
     </ClCompile>
+    <ClCompile Include="image_to_block_compressed.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="raw_file_buffer.h">
@@ -86,10 +89,19 @@
     <ClInclude Include="dxt1_to_bitmap_conversion.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="image_to_block_compressed.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="compress_block_minmax.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="block_compressed_pixels.inl">
       <Filter>include</Filter>
+    </None>
+    <None Include="compress_block_minmax.cpp">
+      <Filter>source</Filter>
     </None>
   </ItemGroup>
 </Project>

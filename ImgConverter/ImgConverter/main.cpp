@@ -1,4 +1,6 @@
 #include "command_line_parameters.h"
+#include "../ImgLib/image_to_block_compressed.h"
+#include "../ImgLib/compress_block_minmax.h"
 #include "../ImgLib/dxt1_to_bitmap_conversion.h"
 #include "../ImgLib/block_compressed_image.h"
 #include "../ImgLib/dxt1_file_reader.h"
@@ -136,6 +138,29 @@ int main(int argc, char *argv[])
 			return 1;
 		}
 		if (!WriteImageToBitmapFile(imgResult, commandLineParams.GetDestinationPath()))
+		{
+			std::cout << "Failed to write destination file '" << commandLineParams.GetDestinationPath() << "'";
+			return 1;
+		}
+	}
+	else if (srcFiletype == CommandLineParameters::FileType::Bitmap &&
+		destFiletype == CommandLineParameters::FileType::DDS)
+	{
+		std::unique_ptr<Image> srcImage = LoadBitmapFromFile(commandLineParams.GetSourcePath());
+		if (srcImage == nullptr)
+		{
+			std::cout << "Failed to load source file '" << commandLineParams.GetSourcePath() << "'";
+			return 1;
+		}
+		ImageToBlockCompressedConverter converter;
+		CompressBlocksMinMax minMaxSampler;
+		auto imgResult = converter.ConvertImage(*srcImage, minMaxSampler);
+		if (imgResult == nullptr)
+		{
+			std::cout << "Failed to convert image from bmp to dds";
+			return 1;
+		}
+		if (!WriteImageToDXT1File(imgResult, commandLineParams.GetDestinationPath()))
 		{
 			std::cout << "Failed to write destination file '" << commandLineParams.GetDestinationPath() << "'";
 			return 1;

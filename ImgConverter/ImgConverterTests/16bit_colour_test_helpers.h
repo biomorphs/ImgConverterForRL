@@ -6,6 +6,11 @@
 
 // Helper for testing quantised values with error
 #define APPROX_MATCH_QUANTISED(maxError, source, target)	\
-			( source >= (target-maxError) && source <= (target+maxError) )
+			( (int32_t)source >= ((int32_t)target-(int32_t)maxError) && (int32_t)source <= ((int32_t)target+(int32_t)maxError) )
+
+#define APPROX_MATCH_COLOUR(source, target)	\
+	( APPROX_MATCH_QUANTISED(8, source.GetRed(), target.GetRed()) && \
+	APPROX_MATCH_QUANTISED(4, source.GetGreen(), target.GetGreen()) && \
+	APPROX_MATCH_QUANTISED(8, source.GetBlue(), target.GetBlue()) )
 
 #endif

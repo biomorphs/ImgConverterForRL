@@ -2,23 +2,21 @@
 #define IMGCONVERTER_COLOUR_RGB_INL_INCLUDED
 
 #include "utils.h"
+#include <math.h>
 
 ColourRGB::ColourRGB()
+	: m_rgba(0)
 {
 }
 
 ColourRGB::ColourRGB(const ColourRGB& other)
 {
-	m_rgb[0] = other.m_rgb[0];
-	m_rgb[1] = other.m_rgb[1];
-	m_rgb[2] = other.m_rgb[2];
+	m_rgba = other.m_rgba;
 }
 
 ColourRGB::ColourRGB(ColourRGB&& other)
 {
-	m_rgb[0] = other.m_rgb[0];
-	m_rgb[1] = other.m_rgb[1];
-	m_rgb[2] = other.m_rgb[2];
+	m_rgba = other.m_rgba;
 }
 
 ColourRGB::ColourRGB(const uint8_t* b)
@@ -78,24 +76,19 @@ ColourRGB::~ColourRGB()
 
 ColourRGB& ColourRGB::operator=(const ColourRGB& other)
 {
-	m_rgb[0] = other.m_rgb[0];
-	m_rgb[1] = other.m_rgb[1];
-	m_rgb[2] = other.m_rgb[2];
+	m_rgba = other.m_rgba;
 	return *this;
 }
 
 ColourRGB& ColourRGB::operator=(ColourRGB&& other)
 {
-	m_rgb[0] = other.m_rgb[0];
-	m_rgb[1] = other.m_rgb[1];
-	m_rgb[2] = other.m_rgb[2];
+	m_rgba = other.m_rgba;
 	return *this;
 }
 
 bool ColourRGB::operator==(const ColourRGB& other) const
 {
-	return (m_rgb[0] == other.m_rgb[0] && m_rgb[1] == other.m_rgb[1] && m_rgb[2] == other.m_rgb[2]);
-	return false;
+	return (m_rgba == other.m_rgba);
 }
 
 bool ColourRGB::operator!=(const ColourRGB& other) const
@@ -144,6 +137,37 @@ uint16_t ColourRGB::ToR5G6B5() const
 	uint16_t greenQuantised = static_cast<uint16_t>(m_rgb[1]) >> 2;
 	uint16_t blueQuantised = static_cast<uint16_t>(m_rgb[2]) >> 3;
 	return (redQuantised << 11) | (greenQuantised << 5) | blueQuantised;
+}
+
+ColourRGB ColourRGB::Min(const ColourRGB& c0, const ColourRGB& c1)
+{
+	ColourRGB minValue;
+	minValue.SetRed(c0.GetRed() < c1.GetRed() ? c0.GetRed() : c1.GetRed());
+	minValue.SetGreen(c0.GetGreen() < c1.GetGreen() ? c0.GetGreen() : c1.GetGreen());
+	minValue.SetBlue(c0.GetBlue() < c1.GetBlue() ? c0.GetBlue() : c1.GetBlue());
+	return minValue;
+}
+
+ColourRGB ColourRGB::Max(const ColourRGB& c0, const ColourRGB& c1)
+{
+	ColourRGB maxValue;
+	maxValue.SetRed(c0.GetRed() > c1.GetRed() ? c0.GetRed() : c1.GetRed());
+	maxValue.SetGreen(c0.GetGreen() > c1.GetGreen() ? c0.GetGreen() : c1.GetGreen());
+	maxValue.SetBlue(c0.GetBlue() > c1.GetBlue() ? c0.GetBlue() : c1.GetBlue());
+	return maxValue;
+}
+
+float ColourRGB::Distance(const ColourRGB& source, const ColourRGB& target)
+{
+	// Weighted euclidian distance to take into account eye sensitivity (approx)
+	// Avoid the sqrt since we only need relative distances
+	const float weightings[3] = { 0.299f, 0.587f, 0.114f };	// RGB weighting factor
+	const float sourceRGB[3] = { source.GetRedAsFloat(), source.GetGreenAsFloat() , source.GetBlueAsFloat() };
+	const float targetRGB[3] = { target.GetRedAsFloat(), target.GetGreenAsFloat() , target.GetBlueAsFloat() };
+
+	return	powf((sourceRGB[0] - targetRGB[0]) * weightings[0], 2.0f) +
+			powf((sourceRGB[1] - targetRGB[1]) * weightings[1], 2.0f) +
+			powf((sourceRGB[2] - targetRGB[2]) * weightings[2], 2.0f);
 }
 
 #endif
