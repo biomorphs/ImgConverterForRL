@@ -43,7 +43,7 @@ TEST_CASE("Test valid bmp header data")
 	testHeader.m_colourIndicesUsed = 0;
 	testHeader.m_colourIndicesImportant = 0;
 	BitmapFileReader fileReader;
-	REQUIRE(fileReader.IsBitmapFormatSupported(testHeader) == true);
+	REQUIRE(fileReader.IsFormatSupported(testHeader) == true);
 }
 
 TEST_CASE("Test invalid bmp header data")
@@ -70,25 +70,25 @@ TEST_CASE("Test invalid bmp header data")
 	SECTION("Bad data offset")
 	{
 		testHeader.m_dataOffset = 0;
-		REQUIRE(bmpFileReader.IsBitmapFormatSupported(testHeader) == false);
+		REQUIRE(bmpFileReader.IsFormatSupported(testHeader) == false);
 	}
 
 	SECTION("Unsupported bmp type")
 	{
 		testHeader.m_infoHeaderSize = 0;
-		REQUIRE(bmpFileReader.IsBitmapFormatSupported(testHeader) == false);
+		REQUIRE(bmpFileReader.IsFormatSupported(testHeader) == false);
 	}
 
 	SECTION("Unsupported compression")
 	{
 		testHeader.m_compressionType = 1;
-		REQUIRE(bmpFileReader.IsBitmapFormatSupported(testHeader) == false);
+		REQUIRE(bmpFileReader.IsFormatSupported(testHeader) == false);
 	}
 
 	SECTION("Unsupported pixel format")
 	{
 		testHeader.m_colourBitsPerPx = 8;
-		REQUIRE(bmpFileReader.IsBitmapFormatSupported(testHeader) == false);
+		REQUIRE(bmpFileReader.IsFormatSupported(testHeader) == false);
 	}
 }
 
@@ -113,7 +113,7 @@ TEST_CASE("Parse valid 24bit 16x16 bmp file header")
 
 	SECTION("Validate header with reader")
 	{
-		REQUIRE(bmpFileReader.IsBitmapFormatSupported(bmpHeader) == true);
+		REQUIRE(bmpFileReader.IsFormatSupported(bmpHeader) == true);
 	}
 }
 
@@ -127,7 +127,7 @@ TEST_CASE("Parse unsupported bitmap header")
 	BitmapFileHeader bmpHeader;
 
 	REQUIRE(bmpFileReader.ExtractHeader(dataBuffer, bmpHeader) == true);
-	REQUIRE(bmpFileReader.IsBitmapFormatSupported(bmpHeader) == false);
+	REQUIRE(bmpFileReader.IsFormatSupported(bmpHeader) == false);
 }
 
 TEST_CASE("Load valid 24bit 64x16 bmp file into image storage")

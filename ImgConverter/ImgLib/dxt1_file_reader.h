@@ -7,6 +7,8 @@ class RawFileBuffer;
 class BlockCompressedImage;
 struct DXT1FileHeader;
 
+// This reads a DXT1 file from DDS data in the RawFileBuffer provided
+// A block-compressed image is returned (i.e. no decompression happens here)
 class DXT1FileReader
 {
 public:

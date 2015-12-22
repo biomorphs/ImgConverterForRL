@@ -2,17 +2,17 @@
 #include "image.h"
 #include "block_compressed_image.h"
 
-DXT1ToBitmapConversion::DXT1ToBitmapConversion()
+DXT1ToBitmapConverter::DXT1ToBitmapConverter()
 {
 
 }
 
-DXT1ToBitmapConversion::~DXT1ToBitmapConversion()
+DXT1ToBitmapConverter::~DXT1ToBitmapConverter()
 {
 
 }
 
-std::unique_ptr<Image> DXT1ToBitmapConversion::Convert(const BlockCompressedImage& sourceImage)
+std::unique_ptr<Image> DXT1ToBitmapConverter::Convert(const BlockCompressedImage& sourceImage)
 {
 	if (sourceImage.GetWidthBlocks() == 0 || sourceImage.GetHeightBlocks() == 0)
 	{

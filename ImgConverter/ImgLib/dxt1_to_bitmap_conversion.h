@@ -6,11 +6,12 @@
 class Image;
 class BlockCompressedImage;
 
-class DXT1ToBitmapConversion
+// This takes a block-compressed image (DXT1 format), and returns a decompressed Image object
+class DXT1ToBitmapConverter
 {
 public:
-	DXT1ToBitmapConversion();
-	~DXT1ToBitmapConversion();
+	DXT1ToBitmapConverter();
+	~DXT1ToBitmapConverter();
 
 	std::unique_ptr<Image> Convert(const BlockCompressedImage& sourceImage);
 };

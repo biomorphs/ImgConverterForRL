@@ -1,7 +1,8 @@
 #include "compress_block_minmax.h"
 #include "image.h"
 
-void CompressBlocksMinMax::CalculateBlockRefColours(const Image& sourceImg, uint32_t blockX, uint32_t blockY, ColourRGB& minColour, ColourRGB& maxColour)
+// This simply calculates the min/max colours in a 4x4 block
+void CompressBlocksMinMax::CalculateBlockRefColours(const Image& sourceImg, uint32_t blockX, uint32_t blockY, ColourRGB& ref0, ColourRGB& ref1)
 {
 	ColourRGB minColourAccum(255,255,255), maxColourAccum(0,0,0);
 	const uint32_t c_startX = blockX << 2;
@@ -13,13 +14,13 @@ void CompressBlocksMinMax::CalculateBlockRefColours(const Image& sourceImg, uint
 	{
 		for (uint32_t pX = c_startX; pX < c_endX; ++pX)
 		{
-			const uint32_t flippedY = c_sourceImgMaxY - 1 - pY;
+			const uint32_t flippedY = c_sourceImgMaxY - 1 - pY;		// y-axis is flipped in compressed image
 			ColourRGB onePixel;
 			sourceImg.GetPixelColour(pX, flippedY, onePixel);
 			minColourAccum = ColourRGB::Min(minColourAccum, onePixel);
 			maxColourAccum = ColourRGB::Max(maxColourAccum, onePixel);
 		}
 	}
-	minColour = minColourAccum;
-	maxColour = maxColourAccum;
+	ref0 = minColourAccum;
+	ref1 = maxColourAccum;
 }

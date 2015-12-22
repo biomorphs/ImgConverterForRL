@@ -15,9 +15,15 @@
     <ClCompile Include="command_line_parameters.cpp">
       <Filter>source</Filter>
     </ClCompile>
+    <ClCompile Include="io_wrappers.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="command_line_parameters.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="io_wrappers.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

@@ -44,7 +44,7 @@ TEST_CASE("Test simple conversion")
 	BlockCompressedImage testImage(4,4);
 	FillBlockWithColour(testImage, 0, 0, c_refColour);
 
-	DXT1ToBitmapConversion converter;
+	DXT1ToBitmapConverter converter;
 	auto convertedImage = converter.Convert(testImage);
 	REQUIRE(convertedImage.get() != nullptr);
 	REQUIRE(convertedImage->GetWidthPixels() == 4);
@@ -65,7 +65,7 @@ TEST_CASE("Test multi-block conversion")
 	FillBlockWithColour(testImage, 2, 1, c_refColour2);
 	FillBlockWithColour(testImage, 3, 1, c_refColour3);
 
-	DXT1ToBitmapConversion converter;
+	DXT1ToBitmapConverter converter;
 	auto convertedImage = converter.Convert(testImage);
 	REQUIRE(convertedImage.get() != nullptr);
 	REQUIRE(convertedImage->GetWidthPixels() == 16);

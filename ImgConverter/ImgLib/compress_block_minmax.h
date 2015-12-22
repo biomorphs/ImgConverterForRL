@@ -1,9 +1,12 @@
 #ifndef IMGCONVERTER_COMPRESS_BLOCK_MINMAX_INCLUDED
 #define IMGCONVERTER_COMPRESS_BLOCK_MINMAX_INCLUDED
 
-#include "image_to_block_compressed.h"
+#include "bitmap_to_dxt1_converter.h"
 
-class CompressBlocksMinMax : public IBlockCompression
+// This calculates DXT block reference colours by simply taking
+// the min/max colour in the source image block. Not very accurate, but
+// its fairly fast
+class CompressBlocksMinMax : public IDXT1BlockRefColourCalculator
 {
 public:
 	virtual ~CompressBlocksMinMax() { }

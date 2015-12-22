@@ -27,7 +27,7 @@ TEST_CASE("Min/Max are correct")
 	
 	CompressBlocksMinMax minMax;
 	ColourRGB minColour, maxColour;
-	minMax.CalculateBlockRefColours(testImage, 1, 0, minColour, maxColour);
+	minMax.CalculateBlockRefColours(testImage, 1, 1, minColour, maxColour);
 	
 	REQUIRE(minColour.GetRed() == 16);
 	REQUIRE(minColour.GetGreen() == 2);

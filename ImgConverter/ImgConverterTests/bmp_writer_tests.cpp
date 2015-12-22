@@ -10,7 +10,7 @@ TEST_CASE("Write image data to file buffer")
 	RawFileBuffer dataBuffer;
 	Image testImageData(16, 16);
 	BitmapFileWriter fileWriter;
-	REQUIRE(fileWriter.WriteBitmapFile(testImageData, dataBuffer) == true);
+	REQUIRE(fileWriter.WriteFile(testImageData, dataBuffer) == true);
 	REQUIRE(dataBuffer.GetContents() != nullptr);
 	REQUIRE(dataBuffer.GetBufferSize() == 822);		// 16x16 24 bit bmp should be 822 bytes
 }
@@ -20,7 +20,7 @@ TEST_CASE("Don't write empty image")
 	RawFileBuffer dataBuffer;
 	Image testImageData(0, 8);
 	BitmapFileWriter fileWriter;
-	REQUIRE(fileWriter.WriteBitmapFile(testImageData, dataBuffer) == false);
+	REQUIRE(fileWriter.WriteFile(testImageData, dataBuffer) == false);
 }
 
 TEST_CASE("Load / Write / Load cycle")
@@ -39,7 +39,7 @@ TEST_CASE("Load / Write / Load cycle")
 
 	{	// Write loaded image back to a new file data buffer
 		BitmapFileWriter fileWriter;
-		REQUIRE(fileWriter.WriteBitmapFile(*sourceImage.get(), sourceImageWroteToBuffer) == true);
+		REQUIRE(fileWriter.WriteFile(*sourceImage.get(), sourceImageWroteToBuffer) == true);
 		REQUIRE(sourceImageWroteToBuffer.GetContents() != nullptr);
 	}
 

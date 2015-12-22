@@ -23,6 +23,12 @@ public:
 		Unknown
 	};
 
+	// DXT block compression types
+	enum class CompressionMethod
+	{
+		UseMinMax,
+	};
+
 	ParseResult ParseCommandLine(int argc, char* argv[]);
 	void DisplayHelp();
 
@@ -30,11 +36,13 @@ public:
 	const std::string& GetDestinationPath() const;
 	FileType GetSourceFiletype() const;
 	FileType GetDestinationFiletype() const;
+	CompressionMethod GetCompressorMethod() const;
 
 private:
 	FileType GetFiletypeFromPath(const std::string& path) const;
 	std::string m_sourcePath;
 	std::string m_destinationPath;
+	CompressionMethod m_compressionMethod;
 };
 
 #endif

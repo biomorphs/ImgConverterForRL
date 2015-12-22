@@ -12,7 +12,7 @@ DXT1FileWriter::~DXT1FileWriter()
 
 }
 
-bool DXT1FileWriter::WriteDXT1File(const BlockCompressedImage& sourceImage, RawFileBuffer& targetBuffer)
+bool DXT1FileWriter::WriteFile(const BlockCompressedImage& sourceImage, RawFileBuffer& targetBuffer)
 {
 	if (sourceImage.GetWidthPixels() == 0 || sourceImage.GetHeightPixels() == 0)
 	{

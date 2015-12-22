@@ -5,7 +5,7 @@
 #include <stdint.h>
 #include <vector>
 
-// Class representing an image containing RGB data in normal pixel order
+// Class representing an image containing RGB data (0,0=bottom left pixel)
 class Image
 {
 public:

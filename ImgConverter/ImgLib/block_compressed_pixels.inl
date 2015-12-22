@@ -71,6 +71,7 @@ inline uint32_t BlockCompressedPixels::GetIndexShiftPosition(uint32_t x, uint32_
 	return (y << 3) + (x << 1);	// (y * 8) + (x * 2)
 }
 
+// Build a LUT for a DXT according to the DXT1 specifications
 BlockCompressedPixels::ColourLUT::ColourLUT(const BlockCompressedPixels& block)
 {
 	const float c_twoThirds = 2.0f / 3.0f;

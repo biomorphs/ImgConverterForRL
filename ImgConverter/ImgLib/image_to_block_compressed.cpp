@@ -1,17 +1,19 @@
-#include "image_to_block_compressed.h"
+#include "bitmap_to_dxt1_converter.h"
 #include "block_compressed_image.h"
 #include "image.h"
 
-ImageToBlockCompressedConverter::ImageToBlockCompressedConverter()
+BitmapToDXT1Converter::BitmapToDXT1Converter()
 {
 
 }
 
-ImageToBlockCompressedConverter::~ImageToBlockCompressedConverter()
+BitmapToDXT1Converter::~BitmapToDXT1Converter()
 {
 }
 
-void ImageToBlockCompressedConverter::BuildPixelIndicesForBlock(const Image& source, uint32_t blockX, uint32_t blockY, BlockCompressedPixels& target)
+// This runs through each pixel in a 4x4 block, finds the closest match in the block
+// LUT, and assigns it the correct index
+void BitmapToDXT1Converter::BuildPixelIndicesForBlock(const Image& source, uint32_t blockX, uint32_t blockY, BlockCompressedPixels& target)
 {
 	const uint32_t startX = blockX << 2;
 	const uint32_t startY = blockY << 2;
@@ -22,7 +24,7 @@ void ImageToBlockCompressedConverter::BuildPixelIndicesForBlock(const Image& sou
 	BlockCompressedPixels::ColourLUT lut(target);
 	for (uint32_t py = startY; py < endY; ++py)
 	{
-		const uint32_t flippedY = maxPixelsY - 1 - py;
+		const uint32_t flippedY = maxPixelsY - 1 - py;		// Y-axis is flipped in compressed images
 		for (uint32_t px = startX; px < endX; ++px)
 		{
 			source.GetPixelColour(px, flippedY, sourceColour);
@@ -32,7 +34,7 @@ void ImageToBlockCompressedConverter::BuildPixelIndicesForBlock(const Image& sou
 	}
 }
 
-std::unique_ptr<BlockCompressedImage> ImageToBlockCompressedConverter::ConvertImage(const Image& source, IBlockCompression& compressor)
+std::unique_ptr<BlockCompressedImage> BitmapToDXT1Converter::Convert(const Image& source, IDXT1BlockRefColourCalculator& compressor)
 {
 	if (source.GetWidthPixels() == 0 || source.GetHeightPixels() == 0)
 	{
@@ -59,6 +61,7 @@ std::unique_ptr<BlockCompressedImage> ImageToBlockCompressedConverter::ConvertIm
 			compressor.CalculateBlockRefColours(source, blockX, blockY, refColour0, refColour1);
 			targetBlock->SetRefColour1(refColour0);
 			targetBlock->SetRefColour2(refColour1);
+
 			BuildPixelIndicesForBlock(source, blockX, blockY, *targetBlock);
 		}
 	}

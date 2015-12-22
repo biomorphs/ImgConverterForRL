@@ -50,7 +50,7 @@ ColourRGB::ColourRGB(float r, float g, float b)
 
 ColourRGB::ColourRGB(uint16_t colR5G6B5)
 {
-	// There are a few methods of doing this, we will use the accurate but slow method of 
+	// There are a few methods of doing this, we will use the more accurate but slow method of 
 	// expanding in floating point then converting back to 1 byte per channel
 
 	// First extract the individual channels
@@ -58,12 +58,10 @@ ColourRGB::ColourRGB(uint16_t colR5G6B5)
 	const uint16_t greenChannel = (colR5G6B5 & 0x7e0) >> 5;
 	const uint16_t blueChannel = (colR5G6B5 & 0x1f);
 
-	// Convert to floating point
+	// Convert to floating point + quantise
 	const float redAsFloat = (redChannel * 255.0f) / 31.0f;
 	const float greenAsFloat = (greenChannel * 255.0f) / 63.0f;
 	const float blueAsFloat = (blueChannel * 255.0f) / 31.0f;
-
-	// Quantise back to rgb8
 	m_rgb[0] = static_cast<uint8_t>(redAsFloat);
 	m_rgb[1] = static_cast<uint8_t>(greenAsFloat);
 	m_rgb[2] = static_cast<uint8_t>(blueAsFloat);
@@ -159,8 +157,7 @@ ColourRGB ColourRGB::Max(const ColourRGB& c0, const ColourRGB& c1)
 
 float ColourRGB::Distance(const ColourRGB& source, const ColourRGB& target)
 {
-	// Weighted euclidian distance to take into account eye sensitivity (approx)
-	// Avoid the sqrt since we only need relative distances
+	// Weighted squared euclidian distance to take into account eye sensitivity (approx - uses YUV conversion weights)
 	const float weightings[3] = { 0.299f, 0.587f, 0.114f };	// RGB weighting factor
 	const float sourceRGB[3] = { source.GetRedAsFloat(), source.GetGreenAsFloat() , source.GetBlueAsFloat() };
 	const float targetRGB[3] = { target.GetRedAsFloat(), target.GetGreenAsFloat() , target.GetBlueAsFloat() };

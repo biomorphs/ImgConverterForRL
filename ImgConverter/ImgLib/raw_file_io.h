@@ -6,6 +6,7 @@
 
 class RawFileBuffer;
 
+// Helper class used to load binary files from disk
 class RawFileBufferReader
 {
 public:
@@ -17,6 +18,7 @@ private:
 	MOCKABLE bool LoadInternal(const std::string& path, RawFileBuffer& target);
 };
 
+// Helper class used to write binary data to disk
 class RawFileBufferWriter
 {
 public:

@@ -33,6 +33,4 @@
 
 #endif	//ASSERTS_ENABLED
 
-
-
 #endif	//IMGCONVERTER_UTILS_INCLUDED

@@ -7,6 +7,8 @@ class RawFileBuffer;
 class Image;
 struct BitmapFileHeader;
 
+// This class rakes a RawFileBuffer and returns an Image object containing the 
+// image data
 class BitmapFileReader
 {
 public:
@@ -14,7 +16,7 @@ public:
 	~BitmapFileReader();
 
 	bool ExtractHeader(const RawFileBuffer& data, BitmapFileHeader& targetHeader);
-	bool IsBitmapFormatSupported(const BitmapFileHeader& header);
+	bool IsFormatSupported(const BitmapFileHeader& header);
 	std::unique_ptr<Image> ExtractImage(const RawFileBuffer& data);
 };
 

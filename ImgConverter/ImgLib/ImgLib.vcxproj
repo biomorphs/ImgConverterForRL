@@ -178,7 +178,7 @@
     <ClInclude Include="dxt1_file_writer.h" />
     <ClInclude Include="dxt1_to_bitmap_conversion.h" />
     <ClInclude Include="image.h" />
-    <ClInclude Include="image_to_block_compressed.h" />
+    <ClInclude Include="bitmap_to_dxt1_converter.h" />
     <ClInclude Include="raw_file_buffer.h" />
     <ClInclude Include="raw_file_io.h" />
     <ClInclude Include="utils.h" />
@@ -197,7 +197,6 @@
     <ClCompile Include="image_to_block_compressed.cpp" />
     <ClCompile Include="raw_file_buffer.cpp" />
     <ClCompile Include="raw_file_io.cpp" />
-    <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="block_compressed_pixels.inl" />

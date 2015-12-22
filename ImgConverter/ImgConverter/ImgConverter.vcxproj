@@ -165,10 +165,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="command_line_parameters.cpp" />
+    <ClCompile Include="io_wrappers.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="command_line_parameters.h" />
+    <ClInclude Include="io_wrappers.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ImgLib\ImgLib.vcxproj">

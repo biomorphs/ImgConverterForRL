@@ -8,6 +8,7 @@
 #define APPROX_MATCH_QUANTISED(maxError, source, target)	\
 			( (int32_t)source >= ((int32_t)target-(int32_t)maxError) && (int32_t)source <= ((int32_t)target+(int32_t)maxError) )
 
+// Helper for testing ColourRGB objects converted from R5G6B5 against ref colours
 #define APPROX_MATCH_COLOUR(source, target)	\
 	( APPROX_MATCH_QUANTISED(8, source.GetRed(), target.GetRed()) && \
 	APPROX_MATCH_QUANTISED(4, source.GetGreen(), target.GetGreen()) && \

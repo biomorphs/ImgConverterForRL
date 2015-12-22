@@ -31,7 +31,7 @@ public:
 	public:
 		inline ColourLUT(const BlockCompressedPixels& block);
 		inline const ColourRGB& GetColour(uint32_t index);
-		inline uint32_t ClosestIndex(const ColourRGB& testColour);
+		inline uint32_t ClosestIndex(const ColourRGB& testColour);	// Calculate best index for this colour
 	private:
 		ColourRGB m_lut[4];
 	};

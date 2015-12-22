@@ -33,7 +33,7 @@ bool BitmapFileReader::ExtractHeader(const RawFileBuffer& data, BitmapFileHeader
 	return true;
 }
 
-bool BitmapFileReader::IsBitmapFormatSupported(const BitmapFileHeader& header)
+bool BitmapFileReader::IsFormatSupported(const BitmapFileHeader& header)
 {
 	if (header.m_dataOffset < sizeof(BitmapFileHeader))	// Data cannot overlap header
 	{
@@ -71,7 +71,7 @@ std::unique_ptr<Image> BitmapFileReader::ExtractImage(const RawFileBuffer& data)
 		return nullptr;
 	}
 
-	if (!IsBitmapFormatSupported(imageHeader))
+	if (!IsFormatSupported(imageHeader))
 	{
 		return nullptr;
 	}
@@ -92,7 +92,7 @@ std::unique_ptr<Image> BitmapFileReader::ExtractImage(const RawFileBuffer& data)
 	{
 		for (uint32_t pX = 0; pX < c_width; ++pX)
 		{
-			// Colours are stored in BGR format
+			// Colours are stored in BGR format, swizzle them here
 			ColourRGB c(*(dataPtr + 2), *(dataPtr + 1), *dataPtr);
 			theImage->SetPixelColour(pX, pY, c);
 			dataPtr += 3;

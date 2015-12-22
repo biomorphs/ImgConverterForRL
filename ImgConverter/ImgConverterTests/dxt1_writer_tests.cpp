@@ -10,7 +10,7 @@ TEST_CASE("Write empty image to buffer")
 	RawFileBuffer dataBuffer;
 	BlockCompressedImage testImageData(16, 16);
 	DXT1FileWriter fileWriter;
-	REQUIRE(fileWriter.WriteDXT1File(testImageData, dataBuffer) == true);
+	REQUIRE(fileWriter.WriteFile(testImageData, dataBuffer) == true);
 	REQUIRE(dataBuffer.GetContents() != nullptr);
 	REQUIRE(dataBuffer.GetBufferSize() == 256);		// 16x16 dxt1 file should be 256 bytes
 }
@@ -20,7 +20,7 @@ TEST_CASE("Don't write empty dxt image")
 	RawFileBuffer dataBuffer;
 	BlockCompressedImage testImageData(0, 8);
 	DXT1FileWriter fileWriter;
-	REQUIRE(fileWriter.WriteDXT1File(testImageData, dataBuffer) == false);
+	REQUIRE(fileWriter.WriteFile(testImageData, dataBuffer) == false);
 }
 
 TEST_CASE("Load / Write / Load dxt1 cycle")
@@ -39,7 +39,7 @@ TEST_CASE("Load / Write / Load dxt1 cycle")
 
 	{	// Write loaded image back to a new file data buffer
 		DXT1FileWriter fileWriter;
-		REQUIRE(fileWriter.WriteDXT1File(*sourceImage.get(), sourceImageWroteToBuffer) == true);
+		REQUIRE(fileWriter.WriteFile(*sourceImage.get(), sourceImageWroteToBuffer) == true);
 		REQUIRE(sourceImageWroteToBuffer.GetContents() != nullptr);
 	}
 

@@ -9,20 +9,23 @@ class Image;
 class ColourRGB;
 
 // Interface for calculating LUT ref colours for blocks
-class IBlockCompression
+class IDXT1BlockRefColourCalculator
 {
 public:
-	virtual ~IBlockCompression() { }
+	virtual ~IDXT1BlockRefColourCalculator() { }
 	virtual void CalculateBlockRefColours(const Image& sourceImg, uint32_t blockX, uint32_t blockY, ColourRGB& ref0, ColourRGB& ref1) = 0;
 };
 
-class ImageToBlockCompressedConverter
+// This takes a Image object and compresses it to DXT1 format, using the 
+// IDXT1BlockRefColourCalculator to determine how block reference colours
+// are calculated.
+class BitmapToDXT1Converter
 {
 public:
-	ImageToBlockCompressedConverter();
-	~ImageToBlockCompressedConverter();
+	BitmapToDXT1Converter();
+	~BitmapToDXT1Converter();
 
-	std::unique_ptr<BlockCompressedImage> ConvertImage(const Image& source, IBlockCompression& compressor);
+	std::unique_ptr<BlockCompressedImage> Convert(const Image& source, IDXT1BlockRefColourCalculator& compressor);
 
 private:
 	void BuildPixelIndicesForBlock(const Image& source, uint32_t blockX, uint32_t blockY, BlockCompressedPixels& target);

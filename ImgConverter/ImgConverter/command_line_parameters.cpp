@@ -3,6 +3,7 @@
 #include <algorithm>
 
 CommandLineParameters::CommandLineParameters()
+	: m_compressionMethod(CompressionMethod::UseMinMax)
 {
 
 }
@@ -25,6 +26,11 @@ CommandLineParameters::FileType CommandLineParameters::GetSourceFiletype() const
 CommandLineParameters::FileType CommandLineParameters::GetDestinationFiletype() const
 {
 	return GetFiletypeFromPath(m_destinationPath);
+}
+
+CommandLineParameters::CompressionMethod CommandLineParameters::GetCompressorMethod() const
+{
+	return m_compressionMethod;
 }
 
 CommandLineParameters::FileType CommandLineParameters::GetFiletypeFromPath(const std::string& path) const

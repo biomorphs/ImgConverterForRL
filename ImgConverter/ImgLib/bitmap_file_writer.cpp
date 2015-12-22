@@ -13,7 +13,7 @@ BitmapFileWriter::~BitmapFileWriter()
 
 }
 
-bool BitmapFileWriter::WriteBitmapFile(const Image& sourceData, RawFileBuffer& targetBuffer)
+bool BitmapFileWriter::WriteFile(const Image& sourceData, RawFileBuffer& targetBuffer)
 {
 	if (sourceData.GetWidthPixels() == 0 || sourceData.GetHeightPixels() == 0)
 	{

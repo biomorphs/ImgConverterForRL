@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <vector>
 
+// File buffer wrapper. Used to store the contents of raw files from disk
 class RawFileBuffer
 {
 public:
@@ -23,7 +24,6 @@ public:
 	void Resize(size_t newSize);
 
 private:
-		// Disable copying
 	std::vector<uint8_t> m_rawData;
 };
 

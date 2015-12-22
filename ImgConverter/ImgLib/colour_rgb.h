@@ -36,14 +36,14 @@ public:
 	inline float GetGreenAsFloat() const;
 	inline float GetBlueAsFloat() const;
 
-	inline void ToRGBBuffer(uint8_t* targetBuffer) const;
+	inline void ToRGBBuffer(uint8_t* targetBuffer) const;	// Assumes target has space for 3 consecutive bytes
 
 	inline uint16_t ToR5G6B5() const;
 
 	static inline ColourRGB Min(const ColourRGB& c0, const ColourRGB& c1);
 	static inline ColourRGB Max(const ColourRGB& c0, const ColourRGB& c1);
 
-	// Returns a float representing 'distance' from source to target
+	// Returns a float representing relative 'distance' from source to target
 	static inline float Distance(const ColourRGB& source, const ColourRGB& target);
 
 private:
@@ -53,7 +53,6 @@ private:
 		uint32_t m_rgba;
 		uint8_t m_rgb[4];
 	};
-	
 };
 
 #include "colour_rgb.inl"

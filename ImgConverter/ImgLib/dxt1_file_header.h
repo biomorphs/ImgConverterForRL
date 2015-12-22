@@ -8,22 +8,22 @@
 
 enum DXT1HeaderFlags
 {
-	DDSD_CAPS = 0x1,				//Required in every.dds file.	
-	DDSD_HEIGHT = 0x2,				//Required in every.dds file.	
-	DDSD_WIDTH = 0x4,				//Required in every.dds file.
-	DDSD_PIXELFORMAT = 0x1000,		//Required in every.dds file.
-	DDSD_MIPMAPCOUNT = 0x20000,		//Required in a mipmapped texture.
-	DDSD_LINEARSIZE = 0x80000,		//Required when pitch is provided for a compressed texture.
+	DDSD_CAPS = 0x1,						//Required in every.dds file.	
+	DDSD_HEIGHT = 0x2,						//Required in every.dds file.	
+	DDSD_WIDTH = 0x4,						//Required in every.dds file.
+	DDSD_PIXELFORMAT = 0x1000,				//Required in every.dds file.
+	DDSD_MIPMAPCOUNT = 0x20000,				//Required in a mipmapped texture.
+	DDSD_LINEARSIZE = 0x80000,				//Required when pitch is provided for a compressed texture.
 };
 
 enum DXT1HeaderCapsFlags
 {
-	DDSCAPS_TEXTURE = 0x1000		//Required for all textures, the only flag we care about
+	DDSCAPS_TEXTURE = 0x1000				//Required for all textures, the only flag we care about
 };
 
 enum DXT1PixelFormatFlags
 {
-	DDPF_FOURCC = 0x4				//Texture contains compressed RGB data; 
+	DDPF_FOURCC = 0x4						//Texture contains compressed RGB data; 
 };
 
 struct DXT1FileHeader
